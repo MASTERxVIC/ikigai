@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0b2e21"/>
+  <path d="M16 50 L16 30 Q16 14 32 14 Q48 14 48 30 L48 50 Z" fill="#f7f2e5"/>
+  <path d="M14 22 Q32 17 50 22 L50 28 Q32 23 14 28 Z" fill="#c9a86a"/>
+  <text x="32" y="43" text-anchor="middle" font-family="monospace" font-weight="700" font-size="16" fill="#0b2e21">{{}}</text>
+</svg>
