@@ -37,7 +37,7 @@ export const metadata = {
     images: [{ url: "/assets/hero-bg.png" }],
   },
   twitter: { card: "summary_large_image" },
-  icons: { icon: "/assets/ricon.svg" },
+  icons: { icon: "/assets/icon.svg" },
 };
 
 export default function RootLayout({ children }) {

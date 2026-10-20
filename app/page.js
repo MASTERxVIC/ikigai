@@ -95,7 +95,7 @@ export default function Home() {
         <div className="container story-grid">
           <div className="pillar-frame">
             <div className="daruma-sway" style={{ display: "inline-block" }}>
-              <img src="/assets/ricon.svg" alt="ikigaicoding Daruma logo" style={{ height: 190, width: "auto", display: "block", margin: "0 auto" }} />
+              <img src="/assets/icon.svg" alt="ikigaicoding Daruma logo" style={{ height: 190, width: "auto", display: "block", margin: "0 auto" }} />
             </div>
             <p style={{ color: "#e6cd96", letterSpacing: 3, fontSize: 12, fontWeight: 700, marginTop: 18 }}>DARUMA · 達磨</p>
           </div>
