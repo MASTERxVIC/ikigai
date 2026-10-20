@@ -45,7 +45,7 @@ export default function About() {
       <section className="section">
         <div className="container story-grid">
           <div className="pillar-frame">
-            <img src="/assets/riconname.svg" alt="ikigaicoding Daruma logo — Daruma doll with code-bracket eyes and hachimaki headband" style={{ maxWidth: 440, width: "100%", margin: "0 auto", display: "block" }} />
+            <img src="/assets/iconname.svg" alt="ikigaicoding Daruma logo — Daruma doll with code-bracket eyes and hachimaki headband" style={{ maxWidth: 440, width: "100%", margin: "0 auto", display: "block" }} />
             <p style={{ color: "#e6cd96", letterSpacing: 2, fontSize: 12, fontWeight: 700, marginTop: 18 }}>THE OFFICIAL MARK</p>
           </div>
           <div>
@@ -75,7 +75,7 @@ export default function About() {
       <section className="band-emerald section">
         <div className="container" style={{ display: "flex", alignItems: "center", gap: 30, flexWrap: "wrap", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-            <div className="daruma-sway"><img src="/assets/ricon.svg" alt="ikigaicoding Daruma logo" style={{ height: 92, width: "auto", display: "block" }} /></div>
+            <div className="daruma-sway"><img src="/assets/icon.svg" alt="ikigaicoding Daruma logo" style={{ height: 92, width: "auto", display: "block" }} /></div>
             <div>
               <h2 className="h2" style={{ color: "#fff", marginBottom: 6 }}>Like the studio? Work with the studio.</h2>
               <p style={{ color: "#d7e4da", margin: 0, display: "flex", alignItems: "center", gap: 8 }}><IconCheck /> Reply within 24 hours. Honest quote. No jargon.</p>
