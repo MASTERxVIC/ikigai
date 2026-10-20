@@ -1,7 +1,6 @@
 import Link from "next/link";
 import SectionHead from "../components/SectionHead";
 import Faq from "../components/Faq";
-import Daruma from "../components/Daruma";
 import JsonLd from "../components/JsonLd";
 import { IconArrow, IconWhatsApp, SERVICE_ICONS } from "../components/icons";
 import { SERVICES, PROJECTS, FAQS, TESTIMONIALS, STATS, WHATSAPP_LINK } from "../lib/content";
@@ -96,7 +95,7 @@ export default function Home() {
         <div className="container story-grid">
           <div className="pillar-frame">
             <div className="daruma-sway" style={{ display: "inline-block" }}>
-              <Daruma size={170} body="#f7f2e5" line="#f7f2e5" band="#c9a86a" />
+              <img src="/assets/ricon.svg" alt="ikigaicoding Daruma logo" style={{ height: 190, width: "auto", display: "block", margin: "0 auto" }} />
             </div>
             <p style={{ color: "#e6cd96", letterSpacing: 3, fontSize: 12, fontWeight: 700, marginTop: 18 }}>DARUMA · 達磨</p>
           </div>
