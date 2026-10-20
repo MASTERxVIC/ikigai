@@ -23,7 +23,7 @@ export default function Navbar() {
     <nav className={`nav${scrolled ? " scrolled" : ""}`} aria-label="Main navigation">
       <div className="container nav-inner">
         <Link href="/" className="brand" aria-label="ikigaicoding home">
-          <img src="/assets/riconname.svg" alt="ikigaicoding" style={{ height: 42, width: "auto", display: "block" }} />
+          <img src="/assets/iconname.svg" alt="ikigaicoding" style={{ height: 42, width: "auto", display: "block" }} />
         </Link>
         <button className="burger" onClick={() => setOpen(!open)} aria-label="Toggle menu">
           {open ? "✕" : "☰"}

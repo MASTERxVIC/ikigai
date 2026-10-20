@@ -50,7 +50,7 @@ export default function IntroSplash() {
 
       <div className="intro-content">
         <div className="intro-mark">
-          <img src="/assets/ricon.svg" alt="ikigaicoding Daruma logo" style={{ height: 66, width: "auto", display: "block" }} />
+          <img src="/assets/icon.svg" alt="ikigaicoding Daruma logo" style={{ height: 66, width: "auto", display: "block" }} />
         </div>
         <div className="intro-pill">
           <span className="dot" />

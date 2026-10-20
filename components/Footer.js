@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div>
             <div style={{ marginBottom: 16 }}>
-              <img src="/assets/riconname.svg" alt="ikigaicoding logo" style={{ height: 54, width: "auto", display: "block", marginBottom: 10 }} />
+              <img src="/assets/iconname.svg" alt="ikigaicoding logo" style={{ height: 54, width: "auto", display: "block", marginBottom: 10 }} />
               <div style={{ fontSize: 12, color: "#c9a86a", letterSpacing: 2 }}>FALL SEVEN TIMES, GET UP EIGHT</div>
             </div>
             <p style={{ fontSize: 14.5, color: "#b9cec0", maxWidth: 300 }}>
