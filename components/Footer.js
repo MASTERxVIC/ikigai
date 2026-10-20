@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { SERVICES, WHATSAPP_LINK, EMAIL } from "../lib/content";
-import Daruma from "./Daruma";
 import { IconWhatsApp, IconMail, IconPin } from "./icons";
 
 export default function Footer() {
@@ -14,12 +13,9 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-              <Daruma size={52} body="#f7f2e5" line="#f7f2e5" band="#c9a86a" />
-              <div>
-                <div style={{ fontWeight: 800, fontSize: 20, color: "#fff" }}>ikigai<span style={{ fontWeight: 300 }}>coding</span></div>
-                <div style={{ fontSize: 12, color: "#c9a86a", letterSpacing: 2 }}>FALL SEVEN TIMES, GET UP EIGHT</div>
-              </div>
+            <div style={{ marginBottom: 16 }}>
+              <img src="/assets/riconname.svg" alt="ikigaicoding logo" style={{ height: 54, width: "auto", display: "block", marginBottom: 10 }} />
+              <div style={{ fontSize: 12, color: "#c9a86a", letterSpacing: 2 }}>FALL SEVEN TIMES, GET UP EIGHT</div>
             </div>
             <p style={{ fontSize: 14.5, color: "#b9cec0", maxWidth: 300 }}>
               Custom software, websites and search visibility for businesses that refuse to give up.

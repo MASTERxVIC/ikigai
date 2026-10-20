@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, WHATSAPP_LINK } from "../lib/content";
-import Daruma from "./Daruma";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -24,8 +23,7 @@ export default function Navbar() {
     <nav className={`nav${scrolled ? " scrolled" : ""}`} aria-label="Main navigation">
       <div className="container nav-inner">
         <Link href="/" className="brand" aria-label="ikigaicoding home">
-          <Daruma size={38} body="#f7f2e5" line="#f7f2e5" band="#c9a86a" />
-          <span className="brand-word">ikigai<span>coding</span></span>
+          <img src="/assets/riconname.svg" alt="ikigaicoding" style={{ height: 42, width: "auto", display: "block" }} />
         </Link>
         <button className="burger" onClick={() => setOpen(!open)} aria-label="Toggle menu">
           {open ? "✕" : "☰"}

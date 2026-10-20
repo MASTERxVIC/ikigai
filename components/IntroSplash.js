@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Daruma from "./Daruma";
 
 const MARQUEE_A = "SOFTWARE · WEBSITES · SEO · GEO · AEO · DARUMA · ";
 const MARQUEE_B = "IKIGAI · CODE · PURPOSE · RISE · ";
@@ -51,7 +50,7 @@ export default function IntroSplash() {
 
       <div className="intro-content">
         <div className="intro-mark">
-          <Daruma size={56} body="#f7f2e5" line="#f7f2e5" band="#c9a86a" />
+          <img src="/assets/ricon.svg" alt="ikigaicoding Daruma logo" style={{ height: 66, width: "auto", display: "block" }} />
         </div>
         <div className="intro-pill">
           <span className="dot" />
