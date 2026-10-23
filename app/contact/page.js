@@ -1,54 +1,76 @@
+import Link from "next/link";
 import ContactForm from "../../components/ContactForm";
-import { IconWhatsApp, IconMail, IconPin } from "../../components/icons";
-import { WHATSAPP_LINK, EMAIL } from "../../lib/content";
+import PageHero from "../../components/PageHero";
+import { IconMail, IconPin } from "../../components/icons";
+import { EMAIL } from "../../lib/content";
 
 export const metadata = {
   title: "Contact",
   description:
-    "Start your project with ikigaicoding — custom software, websites, SEO, GEO, AEO. We reply within 24 hours.",
+    "Tell ikigaicoding what you want to build — custom software, a website that converts, an online store, or search visibility. We reply within 24 hours.",
   alternates: { canonical: "/contact" },
   openGraph: {
     title: "Contact | ikigaicoding",
     description:
-      "Start your project with ikigaicoding — custom software, websites, SEO, GEO, AEO. We reply within 24 hours.",
+      "Tell ikigaicoding what you want to build — custom software, a website that converts, an online store, or search visibility. We reply within 24 hours.",
     url: "/contact",
   },
 };
 
+const NEXT_STEPS = [
+  { t: "You send the enquiry", d: "Two minutes, in your own words — rough is fine." },
+  { t: "We reply within 24 hours", d: "With questions where we need clarity, or a quote where we don't." },
+  { t: "We agree, then we build", d: "Scope, timeline and price in writing first — then the first eye gets painted." },
+];
+
 export default function Contact() {
   return (
     <>
-      <section className="dark-band" style={{ padding: "150px 0 70px" }}>
-        <div className="container">
-          <span className="eyebrow on-dark">Contact</span>
-          <h1 className="h-display" style={{ color: "#fff", marginTop: 14 }}>Let&apos;s paint<br />the first eye.</h1>
-          <p className="lead on-dark">Tell us about your project. We reply within 24 hours with honest next steps.</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Contact"
+        title="Let's Paint the First Eye"
+        lead="Tell us what you want to build — custom software, a website that converts, an online store, or search visibility that compounds. Two minutes now, a clear reply within 24 hours."
+      />
 
       <section className="section">
         <div className="container contact-grid">
           <div className="form-card">
             <ContactForm />
           </div>
-          <div>
-            <h2 className="h3">Prefer direct?</h2>
-            <div style={{ display: "grid", gap: 14, marginTop: 18 }}>
-              <a href={WHATSAPP_LINK} target="_blank" rel="noopener" className="wa-btn"><IconWhatsApp /> Chat on WhatsApp</a>
-              <div className="card" style={{ padding: 22 }}>
-                <p style={{ display: "flex", gap: 10, alignItems: "center", margin: "0 0 10px" }}><IconMail /> {EMAIL}*</p>
-                <p style={{ display: "flex", gap: 10, alignItems: "center", margin: 0 }}><IconPin /> India · working worldwide</p>
-              </div>
-              <div className="card" style={{ padding: 22, background: "linear-gradient(135deg,#0b2e21,#155a3e)", border: "none" }}>
-                <h3 style={{ color: "#fff", marginBottom: 8 }}>What happens next?</h3>
-                <ol style={{ color: "#d7e4da", fontSize: 14.5, margin: 0, paddingLeft: 20 }}>
-                  <li>You send the enquiry (2 minutes).</li>
-                  <li>We reply within 24 hours with questions or a quote.</li>
-                  <li>We agree on scope, timeline and price — then we build.</li>
-                </ol>
+          <div style={{ display: "grid", gap: 20, alignContent: "start" }}>
+            <div className="card">
+              <h2 className="h3">Talk to us directly</h2>
+              <p style={{ marginTop: 10 }}>
+                Email is the fastest way to reach the studio:
+              </p>
+              <p style={{ display: "flex", gap: 10, alignItems: "center", margin: "0 0 12px" }}>
+                <IconMail /> <a href={`mailto:${EMAIL}`} style={{ fontWeight: 700, color: "var(--emerald-700)" }}>{EMAIL}</a>
+              </p>
+              <p>Prefer to talk first? Use any Book Call button and we&apos;ll set up a time.</p>
+              <p style={{ display: "flex", gap: 10, alignItems: "center", margin: 0 }}>
+                <IconPin /> <span><strong style={{ color: "var(--ink)" }}>India</strong> · working worldwide</span>
+              </p>
+            </div>
+
+            <div className="card">
+              <h2 className="h3">What happens next</h2>
+              <div style={{ display: "grid", gap: 14, marginTop: 12 }}>
+                {NEXT_STEPS.map((s, i) => (
+                  <p key={s.t} style={{ margin: 0 }}>
+                    <strong style={{ color: "var(--ink)" }}>{i + 1}. {s.t}</strong>
+                    <br />{s.d}
+                  </p>
+                ))}
               </div>
             </div>
-            <div className="placeholder-note">*Placeholder email & number — Atul will replace with real contact details.</div>
+
+            <div className="card">
+              <h2 className="h3">Not sure what you need?</h2>
+              <p style={{ marginTop: 10, marginBottom: 0 }}>
+                Start with the <Link href="/services" style={{ fontWeight: 700, color: "var(--emerald-700)" }}>services overview</Link> —
+                eight crafts, one studio — or look at <Link href="/work" style={{ fontWeight: 700, color: "var(--emerald-700)" }}>work we have already shipped</Link>.
+              </p>
+            </div>
           </div>
         </div>
       </section>
