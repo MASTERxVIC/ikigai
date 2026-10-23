@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SectionHead from "../../components/SectionHead";
+import PageHero from "../../components/PageHero";
 import Faq from "../../components/Faq";
 import JsonLd from "../../components/JsonLd";
 import HashScroll from "../../components/HashScroll";
@@ -45,13 +46,11 @@ export default function Services() {
       <JsonLd data={itemList} />
       <JsonLd data={faqSchema(pageFaqs)} />
 
-      <section className="dark-band" style={{ padding: "150px 0 70px" }}>
-        <div className="container">
-          <span className="eyebrow on-dark">Services</span>
-          <h1 className="h-display" style={{ color: "#fff", marginTop: 14 }}>Everything digital,<br />under one roof.</h1>
-          <p className="lead on-dark">Eight services. Zero hand-offs. You talk to the people who actually build it.</p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Services"
+        title="Website Design, Software & Search Services"
+        lead="One studio for custom software development, website design & development, e-commerce, and search visibility — SEO services, GEO and AEO — so the thing we build for you is also the thing your customers find. Pick one craft, or let the studio carry the whole wall."
+      />
 
       <section className="section">
         <div className="container">
@@ -60,15 +59,20 @@ export default function Services() {
               const Icon = SERVICE_ICONS[s.icon];
               const num = `0${i + 1}`;
               return (
-                <article className="svc-card" id={s.slug} key={s.slug} style={{ scrollMarginTop: 100 }}>
+                <article className="svc-card glass-card" id={s.slug} key={s.slug} style={{ scrollMarginTop: 100 }}>
                   <span className="svc-ghost" aria-hidden="true">{num}</span>
                   <div className="svc-eyebrow"><span className="svc-ico"><Icon /></span> {s.title}</div>
                   <p style={{ fontSize: 15.5 }}>{s.desc}</p>
                   <ul className="svc-points">
                     {s.points.map((pt) => <li key={pt}>{pt}</li>)}
                   </ul>
+                  {s.note ? (
+                    <p className="svc-note">
+                      {s.note.text} <Link href={`/services#${s.note.linkSlug}`}>{s.note.linkLabel}</Link>.
+                    </p>
+                  ) : null}
                   <div className="mt-2">
-                    <Link href="/contact" className="svc-pill">Get a quote →</Link>
+                    <Link href="/contact" className="svc-pill">Start a project →</Link>
                   </div>
                 </article>
               );
