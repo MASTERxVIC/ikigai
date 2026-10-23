@@ -2,6 +2,7 @@ import "./globals.css";
 import { Montserrat, Nunito } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CookieBanner from "../components/CookieBanner";
 import IntroSplash from "../components/IntroSplash";
 import { IconWhatsApp } from "../components/icons";
 import { WHATSAPP_LINK } from "../lib/content";
@@ -48,6 +49,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <CookieBanner />
         <a
           href={WHATSAPP_LINK}
           target="_blank"
