@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SectionHead from "../components/SectionHead";
+import WhatWeDoArt from "../components/WhatWeDoArt";
 import Faq from "../components/Faq";
 import JsonLd from "../components/JsonLd";
 import { IconArrow, IconWhatsApp, SERVICE_ICONS } from "../components/icons";
@@ -100,7 +101,8 @@ export default function Home() {
       </div>
 
       {/* SERVICES */}
-      <section className="section" aria-label="Services">
+      <section className="section section-art" aria-label="Services">
+        <WhatWeDoArt />
         <div className="container">
           <SectionHead
             eyebrow="What we do"
