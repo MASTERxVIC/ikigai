@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { SERVICES, WHATSAPP_LINK, EMAIL } from "../lib/content";
-import { IconWhatsApp, IconMail, IconPin } from "./icons";
+import { IconWhatsApp, IconMail } from "./icons";
 
 export default function Footer() {
   return (
@@ -18,7 +18,7 @@ export default function Footer() {
               <div style={{ fontSize: 12, color: "#c9a86a", letterSpacing: 2 }}>FALL SEVEN TIMES, GET UP EIGHT</div>
             </div>
             <p style={{ fontSize: 14.5, color: "#b9cec0", maxWidth: 300 }}>
-              Custom software, websites and search visibility for businesses that refuse to give up.
+              Custom software, websites and search visibility — built with a Daruma&apos;s stubbornness: knocked down, back up, every time.
             </p>
             <div style={{ display: "flex", gap: 10, marginTop: 18 }}>
               <a href={WHATSAPP_LINK} target="_blank" rel="noopener" aria-label="WhatsApp"
@@ -31,32 +31,37 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          <nav aria-label="Services">
-            <h4>Services</h4>
-            {SERVICES.slice(0, 5).map((s) => (
-              <Link key={s.slug} href={`/services#${s.slug}`}>{s.title}</Link>
-            ))}
-          </nav>
           <nav aria-label="Pages">
-            <h4>ikigai</h4>
+            <h4>Pages</h4>
             <Link href="/">Home</Link>
             <Link href="/services">Services</Link>
             <Link href="/work">Work</Link>
             <Link href="/about">About</Link>
             <Link href="/contact">Contact</Link>
+            <Link href="/#faq">FAQ</Link>
+          </nav>
+          <nav aria-label="Services">
+            <h4>Services</h4>
+            {SERVICES.map((s) => (
+              <Link key={s.slug} href={`/services#${s.slug}`}>{s.title}</Link>
+            ))}
+          </nav>
+          <nav aria-label="Legal">
+            <h4>Legal</h4>
+            <Link href="/privacy-policy">Privacy Policy</Link>
+            <Link href="/cookie-policy">Cookie Policy</Link>
+            <Link href="/terms-conditions">Terms &amp; Conditions</Link>
           </nav>
           <div>
-            <h4>Start a project</h4>
-            <p style={{ fontSize: 14.5, color: "#b9cec0" }}>Tell us what you want to build. We reply within 24 hours.*</p>
-            <p style={{ fontSize: 13.5, color: "#8fa79a", display: "flex", gap: 8, alignItems: "center" }}><IconPin /> India · working worldwide</p>
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener" className="btn btn-gold" style={{ marginTop: 12, fontSize: 14, padding: "12px 22px" }}>
-              <IconWhatsApp /> WhatsApp Us
-            </a>
+            <h4>Contact</h4>
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            <p style={{ fontSize: 14.5, color: "#b9cec0" }}>Tell us the goal — we reply within 24 hours with clear next steps.</p>
+            <p style={{ fontSize: 13.5, color: "#8fa79a" }}>Prefer to talk first? Use the Book Call button and we&apos;ll set up a time.</p>
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} ikigaicoding. All rights reserved.</span>
-          <span>*Placeholder contact details — real ones coming soon.</span>
+          <span>© {new Date().getFullYear()} ikigaicoding</span>
+          <span style={{ color: "#e6cd96" }}>Fall seven times, get up eight.</span>
         </div>
       </div>
     </footer>
