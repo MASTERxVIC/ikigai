@@ -400,9 +400,9 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .ref-proj-top h3 { margin: 9px 0 0; font-size: 1.55rem; font-weight: 800; letter-spacing: -.01em; position: relative; z-index: 1; color: #eef0f2; }
 .ref-tag { margin: 6px 0 0; color: #d5ddd9; font-size: .95rem; font-weight: 500; position: relative; z-index: 1; }
 .ref-proj-body { flex: 1; display: flex; flex-direction: column; position: relative; overflow: hidden; }
-.ref-bamboo-frame { position: absolute; left: calc(95% - 85px); top: -40px; width: 169px; height: 141px; opacity: .16; overflow: hidden; transform: rotate(80.42deg); pointer-events: none; z-index: 0; }
+.ref-bamboo-frame { position: absolute; left: calc(95% - 85px); top: -40px; width: 169px; height: 141px; opacity: .16; overflow: hidden; transform: rotate(272.6deg); pointer-events: none; z-index: 0; }
 .ref-bamboo-frame img { width: 100%; height: auto; display: block; }
-.ref-bamboo-frame.bottom { top: auto; bottom: -40px; }
+.ref-bamboo-frame.bottom { top: auto; bottom: -40px; transform: rotate(0deg); }
 .ref-roll { overflow: hidden; position: relative; z-index: 1; }
 .ref-roll-track { display: flex; flex-direction: column; will-change: transform; }
 .ref-roll-copy { flex: none; padding: 24px 28px 8px; }
