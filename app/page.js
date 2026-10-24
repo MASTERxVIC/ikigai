@@ -3,7 +3,27 @@ import SectionHead from "../components/SectionHead";
 import WhatWeDoArt from "../components/WhatWeDoArt";
 import Faq from "../components/Faq";
 import JsonLd from "../components/JsonLd";
-import { IconArrow, IconWhatsApp, SERVICE_ICONS } from "../components/icons";
+import { IconArrow, IconWhatsApp } from "../components/icons";
+import { Pine, Crane } from "../components/Motifs";
+
+// Pine/crane line-art per project, exactly as in the reference design.
+const PROJ_ART = {
+  wanderlust: [
+    { m: "pine", t: "translate(270,15)", c: "#eef0f2", o: 0.5 },
+    { m: "crane", t: "translate(238,10) scale(.62)", c: "#d1c08b", o: 0.85 },
+    { m: "crane", t: "translate(196,20) scale(.45)", c: "#d1c08b", o: 0.7 },
+  ],
+  cineverse: [{ m: "pine", t: "translate(400,12) scale(-1,1)", c: "#eef0f2", o: 0.5 }],
+  "studio-d": [
+    { m: "crane", t: "translate(296,14) scale(.95)", c: "#d1c08b", o: 0.85 },
+    { m: "crane", t: "translate(240,30) scale(.66)", c: "#eef0f2", o: 0.75 },
+    { m: "crane", t: "translate(326,44) scale(.5)", c: "#d1c08b", o: 0.7 },
+  ],
+  "employee-panel": [
+    { m: "pine", t: "translate(308,34) scale(.72)", c: "#eef0f2", o: 0.5 },
+    { m: "crane", t: "translate(246,16) scale(.7)", c: "#d1c08b", o: 0.85 },
+  ],
+};
 import { SERVICES, PROJECTS, FAQS, TESTIMONIALS, STATS, MANIFESTO_STATS, WHATSAPP_LINK } from "../lib/content";
 import { orgSchema, faqSchema, SITE_URL } from "../lib/seo";
 
@@ -100,28 +120,28 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SERVICES */}
-      <section className="section section-art" aria-label="Services">
+      {/* SERVICES — reference design */}
+      <section className="section section-art ref-services" aria-label="Services">
         <WhatWeDoArt />
+        <span className="ref-vert left" aria-hidden="true">生き甲斐</span>
+        <span className="ref-vert right" aria-hidden="true">達磨</span>
         <div className="container">
-          <SectionHead
-            eyebrow="What we do"
-            title="Eight crafts. One obsession: results."
-            lead="From the first line of code to the first page of Google — every service exists for one reason: your business growing."
-          />
-          <div className="grid grid-4">
-            {SERVICES.map((s, i) => {
-              const Icon = SERVICE_ICONS[s.icon];
-              const num = `0${i + 1}`;
-              return (
-                <article className="svc-card svc-compact" key={s.slug}>
-                  <span className="svc-ghost" aria-hidden="true">{num}</span>
-                  <div className="svc-eyebrow"><span className="svc-ico"><Icon /></span> {s.title}</div>
-                  <p>{s.short}</p>
-                  <Link href={`/services#${s.slug}`} className="svc-pill">Learn more →</Link>
-                </article>
-              );
-            })}
+          <div className="ref-shead">
+            <div className="ref-rod" aria-hidden="true"><span className="ref-string" /></div>
+            <span className="ref-eyebrow">What we do</span>
+            <h2>Eight crafts. One obsession: results.</h2>
+            <p>Every engagement hangs in the same hall — pick one craft, or let the studio carry the whole wall.</p>
+          </div>
+          <div className="ref-svc-grid">
+            {SERVICES.map((s, i) => (
+              <article className="ref-svc" key={s.slug}>
+                <div className="ref-svc-rod" aria-hidden="true" />
+                <div className="ref-ghost" aria-hidden="true">{`0${i + 1}`}</div>
+                <h3>{s.title}</h3>
+                <p>{s.short}</p>
+                <Link href={`/services#${s.slug}`} className="ref-pill">Learn more</Link>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -170,35 +190,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WORK */}
-      <section className="section" aria-label="Selected work">
+      {/* WORK — reference design */}
+      <section className="section ref-work" aria-label="Selected work">
         <div className="container">
-          <SectionHead
-            eyebrow="Selected work"
-            title="Proof, not promises."
-            lead="Real builds from the studio floor — each one a Daruma that got back up."
-          />
-          <div className="grid grid-4">
+          <div className="ref-shead">
+            <div className="ref-rod" aria-hidden="true"><span className="ref-string" /></div>
+            <span className="ref-eyebrow">Selected work</span>
+            <h2>Proof, not promises.</h2>
+            <p>Real builds from the studio floor — each one a Daruma that got back up.</p>
+          </div>
+          <div className="ref-proj-grid">
             {PROJECTS.map((p) => (
-              <article className="work-card" key={p.slug}>
-                <div className="work-top">
-                  <span className="monogram" aria-hidden="true">{p.monogram}</span>
-                  <span className="tag">{p.category}</span>
+              <article className="ref-proj" key={p.slug}>
+                <div className="ref-proj-top">
+                  <span className="ref-glyph" aria-hidden="true">{p.monogram}</span>
+                  <svg className="ref-proj-art" viewBox="0 0 400 110" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                    {(PROJ_ART[p.slug] || []).map((a, j) => (
+                      <g key={j} transform={a.t} color={a.c} opacity={a.o}>
+                        {a.m === "pine" ? <Pine /> : <Crane />}
+                      </g>
+                    ))}
+                  </svg>
+                  <span className="ref-kind">{p.category}</span>
+                  <h3>{p.title}</h3>
+                  <p className="ref-tag">{p.subtitle}</p>
                 </div>
-                <div className="work-body">
-                  <h3 style={{ margin: "12px 0 2px" }}>{p.title}</h3>
-                  <span className="work-sub">{p.subtitle}</span>
+                <div className="ref-proj-body">
                   <p>{p.desc}</p>
-                  <div className="chips">
-                    {p.chips.map((c) => <span className="chip" key={c}>{c}</span>)}
+                  <div className="ref-chips">
+                    {p.chips.map((c) => <span className="ref-chip" key={c}>{c}</span>)}
                   </div>
-                  <div className="case-links">
-                    {p.live ? (
-                      <a href={p.live} target="_blank" rel="noopener" className="case-link">Visit live site →</a>
-                    ) : null}
-                    <Link href={`/work#case-${p.slug}`} className="case-link">Read the case study →</Link>
-                  </div>
+                  {p.live ? (
+                    <a href={p.live} target="_blank" rel="noopener" className="ref-proj-link">Visit live site →</a>
+                  ) : null}
+                  <Link href={`/work#case-${p.slug}`} className="ref-proj-link">Read the case study →</Link>
                 </div>
+                <div className="ref-plinth" aria-hidden="true"><i /><b /></div>
               </article>
             ))}
           </div>
