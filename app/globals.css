@@ -78,7 +78,7 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
 .brand-word span { font-weight: 300; }
 .nav-links { display: flex; gap: 30px; align-items: center; }
 .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.4px; }
-.nav-links a:hover, .nav-links a.active, .nav-links a.active { color: var(--gold-light); }
+.nav-links a:hover, .nav-links a.active, .nav-links a active { color: var(--gold-light); }
 .nav-cta { background: var(--gold); color: var(--emerald-950) !important; padding: 10px 20px; border-radius: 999px; font-weight: 700 !important; }
 .burger { display: none; background: none; border: none; color: #fff; font-size: 26px; cursor: pointer; }
 @media (max-width: 860px) {
@@ -394,8 +394,8 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .ref-proj-top { position: relative; padding: 30px 28px 24px; color: #eef0f2; overflow: hidden; background: radial-gradient(ellipse 75% 130% at 50% -30%, rgba(209,192,139,.5), rgba(209,192,139,0) 60%), linear-gradient(160deg, #2a7263, #1a584d 70%); }
 .ref-glyph-svg { position: absolute; right: 0; top: 0; width: 231px; height: 165px; overflow: visible; pointer-events: none; z-index: 0; }
 .ref-bird { position: absolute; z-index: 1; pointer-events: none; }
-.ref-bird-sm { width: 42px; left: 52%; top: 34px; }
-.ref-bird-lg { width: 62px; left: 62%; top: 18px; }
+.ref-bird-sm { width: 21px; left: 50%; top: 51px; }
+.ref-bird-lg { width: 39px; left: 57%; top: 43px; }
 .ref-kind { font-size: .7rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: #d1c08b; position: relative; z-index: 1; }
 .ref-proj-top h3 { margin: 9px 0 0; font-size: 1.55rem; font-weight: 800; letter-spacing: -.01em; position: relative; z-index: 1; color: #eef0f2; }
 .ref-tag { margin: 6px 0 0; color: #d5ddd9; font-size: .95rem; font-weight: 500; position: relative; z-index: 1; }
