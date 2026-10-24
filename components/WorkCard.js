@@ -16,7 +16,12 @@ export default function WorkCard({ p }) {
 
   const sync = () => {
     if (rollRef.current && firstRef.current) {
-      rollRef.current.style.height = firstRef.current.offsetHeight + "px";
+      // Clear first so flex sizing applies, then measure: each copy fills
+      // the viewport, so scrollHeight = body height (>= content height).
+      // This keeps the roll viewport filling the stretched body, so the
+      // links (margin-top: auto) sit at the card bottom, above the plinth.
+      rollRef.current.style.height = "";
+      rollRef.current.style.height = firstRef.current.scrollHeight + "px";
     }
   };
 
