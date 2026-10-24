@@ -93,7 +93,7 @@ export default function Home() {
         <span className="ref-vert right" aria-hidden="true">達磨</span>
         <div className="container">
           <div className="ref-shead">
-            <div className="ref-rod" aria-hidden="true"><span className="ref-string" /></div>
+            <img src="/assets/rope.svg" alt="" aria-hidden="true" className="ref-rope" />
             <span className="ref-eyebrow">What we do</span>
             <h2>Eight crafts. One obsession: results.</h2>
             <p>Every engagement hangs in the same hall — pick one craft, or let the studio carry the whole wall.</p>
@@ -160,7 +160,7 @@ export default function Home() {
       <section className="section ref-work" aria-label="Selected work">
         <div className="container">
           <div className="ref-shead">
-            <div className="ref-rod" aria-hidden="true"><span className="ref-string" /></div>
+            <img src="/assets/rope.svg" alt="" aria-hidden="true" className="ref-rope" />
             <span className="ref-eyebrow">Selected work</span>
             <h2>Proof, not promises.</h2>
             <p>Real builds from the studio floor — each one a Daruma that got back up.</p>
