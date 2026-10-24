@@ -381,10 +381,10 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .ref-svc-rod { width: 52px; height: 6px; border-radius: 99px; margin: 0 auto; background: linear-gradient(180deg, #d1c08b, #8c7647); position: relative; box-shadow: 0 0 0 1px #d1c08b, 0 0 14px rgba(209,192,139,.9); }
 .ref-svc-rod::before, .ref-svc-rod::after { content: ""; position: absolute; top: 50%; width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 35% 32%, #d1c08b, #8c7647); transform: translateY(-50%); }
 .ref-svc-rod::before { left: -6px; } .ref-svc-rod::after { right: -6px; }
-.ref-ghost { font-family: var(--font-num), "Nunito", sans-serif; font-weight: 900; text-align: center; font-size: 9.5rem; line-height: 1; color: rgba(209,192,139,.28); position: absolute; left: 50%; transform: translateX(-50%); bottom: -28px; margin: 0; z-index: 0; pointer-events: none; user-select: none; }
-.ref-svc h3 { margin: 20px 0 0; text-align: center; font-size: 1.02rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #1a584d; line-height: 1.5; position: relative; z-index: 1; }
-.ref-svc p { margin: 16px 0 0; text-align: center; color: #4a544e; font-size: 1rem; flex: 1; position: relative; z-index: 1; }
-.ref-pill { align-self: center; margin-top: 26px; text-decoration: none; font-size: .95rem; font-weight: 800; color: #fff; background: linear-gradient(90deg, #7cc7a9, #14524a); border-radius: 999px; padding: 14px 34px; position: relative; z-index: 1; transition: filter .3s ease; }
+.ref-ghost { font-family: var(--font-body), "Montserrat", sans-serif; font-weight: 900; text-align: center; font-size: 14rem; line-height: 1.1; color: rgba(229, 222, 196, 0.29); position: absolute; left: 50%; transform: translateX(-50%); bottom: -28px; margin: 0; z-index: 0; pointer-events: none; user-select: none; }
+.ref-svc h3 { margin: 20px 0 0; text-align: center; font-size: 0.86rem; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: #245C5B; line-height: 20px; position: relative; z-index: 1; }
+.ref-svc p { margin: 16px 0 0; text-align: center; color: #4C5553; font-size: 0.92rem; line-height: 24px; flex: 1; position: relative; z-index: 1; }
+.ref-pill { align-self: center; margin-top: 26px; text-decoration: none; font-size: 0.8rem; font-weight: 700; color: #FAF9F8; background: linear-gradient(90deg, #7cc7a9, #14524a); border-radius: 999px; padding: 12px 28px; position: relative; z-index: 1; transition: filter .3s ease; }
 .ref-pill:hover { filter: brightness(1.08); }
 .ref-proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; position: relative; z-index: 1; }
 @media (max-width: 820px) { .ref-proj-grid { grid-template-columns: 1fr; } }
