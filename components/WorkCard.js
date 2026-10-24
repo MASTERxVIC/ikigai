@@ -58,7 +58,11 @@ export default function WorkCard({ p }) {
   return (
     <article className="ref-proj" ref={cardRef} onMouseEnter={onEnter} onMouseLeave={onLeave}>
       <div className="ref-proj-top">
-      
+        {/* Ghost monogram — Figma inner shadow: X -16, Y 5, blur 14.9,
+            black 25%. Live scale (font 185): offset signs flipped because
+            Figma's inner-shadow direction is opposite to SVG's — Figma
+            -16/5 lands on the left+bottom inner edges. Letter moved right
+            so it cuts at the card edge like the Figma render. */}
         <svg className="ref-glyph-svg" aria-hidden="true">
           <defs>
             <filter id={`glyph-shadow-${p.monogram}`} x="-30%" y="-30%" width="160%" height="160%">
@@ -70,7 +74,7 @@ export default function WorkCard({ p }) {
               <feComposite operator="over" in="shadow" in2="SourceGraphic" />
             </filter>
           </defs>
-          <text x="245" y="160" textAnchor="end" fontFamily="Montserrat, sans-serif" fontWeight="800" fontSize="185" fill="#FEFFFF" opacity="0.69" filter={`url(#glyph-shadow-${p.monogram})}`}>{p.monogram}</text>
+          <text x="255" y="150" textAnchor="end" fontFamily="Montserrat, sans-serif" fontWeight="800" fontSize="185" fill="#FEFFFF" opacity="0.69" filter={`url(#glyph-shadow-${p.monogram})}`}>{p.monogram}</text>
         </svg>
         <img className="ref-bird ref-bird-sm" src="/assets/flying-bird.svg" alt="" aria-hidden="true" />
         <img className="ref-bird ref-bird-lg" src="/assets/flying-bird.svg" alt="" aria-hidden="true" />
@@ -79,7 +83,8 @@ export default function WorkCard({ p }) {
         <p className="ref-tag">{p.subtitle}</p>
       </div>
       <div className="ref-proj-body">
-        <img className="ref-bamboo" src="/assets/bamboo-grass.svg" alt="" aria-hidden="true" />
+        <div className="ref-bamboo-frame" aria-hidden="true"><img src="/assets/bamboo-grass.svg" alt="" aria-hidden="true" /></div>
+        <div className="ref-bamboo-frame bottom" aria-hidden="true"><img src="/assets/bamboo-grass.svg" alt="" aria-hidden="true" /></div>
         <div className="ref-roll" ref={rollRef}>
           <div className="ref-roll-track" ref={trackRef}>
             <div className="ref-roll-copy" ref={firstRef}>{body(false)}</div>
