@@ -396,6 +396,37 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .ref-bird { position: absolute; z-index: 1; pointer-events: none; }
 .ref-bird-sm { width: 21px; left: 50%; top: 51px; }
 .ref-bird-lg { width: 39px; left: 57%; top: 43px; }
+
+/* bird flight (v10 mockup, seamless loop — no rotation) */
+.bird-static { width: 100%; height: auto; display: block; transition: opacity .12s linear; }
+.bird-frames { position: absolute; inset: 0; }
+.bird-frame { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 100%; height: auto; opacity: 0; transition: opacity .12s linear; }
+.bird-frame.on { opacity: 1; }
+.ref-bird.flying { animation: flySeamless 3.6s linear forwards; }
+.ref-bird.flying .bird-static { opacity: 0; }
+  @keyframes flySeamless {
+    0% { transform: translate(0px, -0px); opacity: 1; }
+    5% { transform: translate(2px, -2px); opacity: 1; }
+    10% { transform: translate(6px, -8px); opacity: 1; }
+    15% { transform: translate(14px, -17px); opacity: 1; }
+    20% { transform: translate(26px, -31px); opacity: 1; }
+    25% { transform: translate(40px, -48px); opacity: 1; }
+    30% { transform: translate(58px, -69px); opacity: 1; }
+    35% { transform: translate(79px, -94px); opacity: 1; }
+    40% { transform: translate(103px, -123px); opacity: 0; }
+    45% { transform: translate(-242px, 140px); opacity: 0; }
+    50% { transform: translate(-200px, 116px); opacity: 1; }
+    55% { transform: translate(-162px, 94px); opacity: 1; }
+    60% { transform: translate(-128px, 74px); opacity: 1; }
+    65% { transform: translate(-98px, 57px); opacity: 1; }
+    70% { transform: translate(-72px, 42px); opacity: 1; }
+    75% { transform: translate(-50px, 29px); opacity: 1; }
+    80% { transform: translate(-32px, 19px); opacity: 1; }
+    85% { transform: translate(-18px, 10px); opacity: 1; }
+    90% { transform: translate(-8px, 5px); opacity: 1; }
+    95% { transform: translate(-2px, 1px); opacity: 1; }
+    100% { transform: translate(0px, 0px); opacity: 1; }
+  }
 .ref-kind { font-size: .7rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: #d1c08b; position: relative; z-index: 1; }
 .ref-proj-top h3 { margin: 9px 0 0; font-size: 1.55rem; font-weight: 800; letter-spacing: -.01em; position: relative; z-index: 1; color: #eef0f2; }
 .ref-tag { margin: 6px 0 0; color: #d5ddd9; font-size: .95rem; font-weight: 500; position: relative; z-index: 1; }
@@ -405,13 +436,14 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .ref-bamboo-frame.bottom { top: auto; bottom: -40px; transform: rotate(0deg); }
 .ref-roll { overflow: hidden; position: relative; z-index: 1; flex: 1; }
 .ref-roll-track { display: flex; flex-direction: column; will-change: transform; height: 200%; }
-.ref-roll-copy { height: 50%; padding: 24px 28px 24px 40px; display: flex; flex-direction: column; }
+.ref-roll-copy { height: 50%; padding: 24px 28px 8px; display: flex; flex-direction: column; }
 .ref-proj-body p { margin: 0; color: #4a544e; font-size: .97rem; }
 .ref-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .ref-chip { font-size: .74rem; font-weight: 700; letter-spacing: .03em; color: #1a584d; border: 1px solid rgba(26,88,77,.35); border-radius: 999px; padding: 5px 12px; background: rgba(26,88,77,.05); }
 .ref-proj-link { margin-top: 20px; align-self: flex-start; display: block; width: max-content; text-decoration: none; font-weight: 700; font-size: .9rem; color: #6e5832; border-bottom: 2px solid #8c7647; padding-bottom: 2px; }
 .ref-roll-copy > .ref-proj-link:first-of-type { margin-top: auto; }
 .ref-proj-link:hover { color: #1a584d; border-color: #1a584d; }
+.ref-plinth { margin-top: 24px; }
 .ref-plinth i { display: block; height: 5px; background: linear-gradient(90deg, #8c7647, #d1c08b, #8c7647); }
 .ref-plinth b { display: block; height: 12px; background: linear-gradient(180deg, #d2d7dd, #aeb8bf); }
 .ref-rope { width: 240px; height: auto; display: block; margin: 0 auto 18px; filter: drop-shadow(0 2px 3px rgba(3, 11, 8, 0.25)); }
