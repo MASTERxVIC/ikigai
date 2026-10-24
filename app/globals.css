@@ -392,12 +392,18 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .ref-proj { background: #fdfcf8; border: 1px solid rgba(209,192,139,.45); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 10px 26px rgba(3,11,8,.07); transition: transform .3s ease, border-color .3s ease; }
 .ref-proj:hover { transform: translateY(-5px); border-color: #8c7647; }
 .ref-proj-top { position: relative; padding: 30px 28px 24px; color: #eef0f2; overflow: hidden; background: radial-gradient(ellipse 75% 130% at 50% -30%, rgba(209,192,139,.5), rgba(209,192,139,0) 60%), linear-gradient(160deg, #2a7263, #1a584d 70%); }
-.ref-glyph { position: absolute; right: 10px; top: -16px; font-family: var(--font-num), "Nunito", sans-serif; font-weight: 900; font-size: 7.2rem; line-height: 1; color: rgba(238,240,242,.12); pointer-events: none; }
-.ref-proj-art { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.ref-glyph { position: absolute; right: 0; top: -34px; font-family: var(--font-body), "Montserrat", sans-serif; font-weight: 800; font-size: 12rem; line-height: 1; color: #FEFFFF; opacity: .69; filter: blur(3px); pointer-events: none; }
+.ref-bird { position: absolute; z-index: 1; pointer-events: none; }
+.ref-bird-sm { width: 42px; left: 52%; top: 34px; }
+.ref-bird-lg { width: 62px; left: 62%; top: 18px; }
 .ref-kind { font-size: .7rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: #d1c08b; position: relative; z-index: 1; }
 .ref-proj-top h3 { margin: 9px 0 0; font-size: 1.55rem; font-weight: 800; letter-spacing: -.01em; position: relative; z-index: 1; color: #eef0f2; }
 .ref-tag { margin: 6px 0 0; color: #d5ddd9; font-size: .95rem; font-weight: 500; position: relative; z-index: 1; }
-.ref-proj-body { padding: 24px 28px 8px; flex: 1; display: flex; flex-direction: column; position: relative; }
+.ref-proj-body { flex: 1; display: flex; flex-direction: column; position: relative; }
+.ref-bamboo { position: absolute; right: -40px; bottom: -30px; width: 260px; height: auto; opacity: .16; transform: rotate(80.42deg); pointer-events: none; z-index: 0; }
+.ref-roll { overflow: hidden; position: relative; z-index: 1; }
+.ref-roll-track { display: flex; flex-direction: column; will-change: transform; }
+.ref-roll-copy { flex: none; padding: 24px 28px 8px; }
 .ref-proj-body p { margin: 0; color: #4a544e; font-size: .97rem; }
 .ref-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .ref-chip { font-size: .74rem; font-weight: 700; letter-spacing: .03em; color: #1a584d; border: 1px solid rgba(26,88,77,.35); border-radius: 999px; padding: 5px 12px; background: rgba(26,88,77,.05); }
