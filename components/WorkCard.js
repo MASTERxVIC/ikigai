@@ -58,7 +58,22 @@ export default function WorkCard({ p }) {
   return (
     <article className="ref-proj" ref={cardRef} onMouseEnter={onEnter} onMouseLeave={onLeave}>
       <div className="ref-proj-top">
-        <span className="ref-glyph" aria-hidden="true">{p.monogram}</span>
+        {/* Ghost monogram — Figma inner shadow, NOT a blur: X -16, Y 5,
+            blur 14.9, black 25% (scaled to the live font size). CSS cannot
+            do a true inner shadow on text, so this is a real SVG filter. */}
+        <svg className="ref-glyph-svg" aria-hidden="true">
+          <defs>
+            <filter id={`glyph-shadow-${p.monogram}`} x="-30%" y="-30%" width="160%" height="160%">
+              <feOffset dx="-9" dy="3" />
+              <feGaussianBlur stdDeviation="8.5" result="offset-blur" />
+              <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse" />
+              <feFlood floodColor="#000000" floodOpacity="0.25" result="color" />
+              <feComposite operator="in" in="color" in2="inverse" result="shadow" />
+              <feComposite operator="over" in="shadow" in2="SourceGraphic" />
+            </filter>
+          </defs>
+          <text x="248" y="185" textAnchor="end" fontFamily="Montserrat, sans-serif" fontWeight="800" fontSize="220" fill="#FEFFFF" opacity="0.69" filter={`url(#glyph-shadow-${p.monogram})}`}>{p.monogram}</text>
+        </svg>
         <img className="ref-bird ref-bird-sm" src="/assets/flying-bird.svg" alt="" aria-hidden="true" />
         <img className="ref-bird ref-bird-lg" src="/assets/flying-bird.svg" alt="" aria-hidden="true" />
         <span className="ref-kind">{p.category}</span>
