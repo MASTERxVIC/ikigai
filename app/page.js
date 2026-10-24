@@ -102,9 +102,9 @@ export default function Home() {
             {SERVICES.map((s, i) => (
               <article className="ref-svc" key={s.slug}>
                 <img src="/assets/rope.svg" alt="" aria-hidden="true" className="ref-card-rope" />
-                <div className="ref-ghost" aria-hidden="true">{`0${i + 1}`}</div>
                 <h3>{s.title}</h3>
                 <p>{s.short}</p>
+                <div className="ref-ghost" aria-hidden="true">{`0${i + 1}`}</div>
                 <Link href={`/services#${s.slug}`} className="ref-pill">Learn more</Link>
               </article>
             ))}
