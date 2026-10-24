@@ -24,7 +24,7 @@ const PROJ_ART = {
     { m: "crane", t: "translate(246,16) scale(.7)", c: "#d1c08b", o: 0.85 },
   ],
 };
-import { SERVICES, PROJECTS, FAQS, TESTIMONIALS, STATS, MANIFESTO_STATS, WHATSAPP_LINK } from "../lib/content";
+import { SERVICES, PROJECTS, FAQS, TESTIMONIALS, STATS, WHATSAPP_LINK } from "../lib/content";
 import { orgSchema, faqSchema, SITE_URL } from "../lib/seo";
 
 export const metadata = {
@@ -75,40 +75,6 @@ export default function Home() {
         </div>
         <div className="scroll-cue" aria-hidden="true"><span>Scroll</span><i /></div>
       </header>
-
-      {/* MANIFESTO */}
-      <section className="section" aria-label="Manifesto">
-        <div className="container manifesto-grid">
-          <div>
-            <span className="eyebrow">Ikigai Coding — Daruma Hall Studio</span>
-            <h2 className="h2" style={{ marginTop: 14 }}>
-              Custom Software &amp; Website Design<br />
-              <em style={{ color: "var(--gold-dark)", fontWeight: 600 }}>SEO · GEO · AEO That Gets You Found</em>
-            </h2>
-            <p className="promise-line">Fall seven times, get up eight — the Daruma promise behind every build.</p>
-            <p className="lead">
-              We build the tools your team opens every morning, websites that convert, and search
-              visibility that gets you found — for businesses that refuse to give up, we keep rising
-              until it works.
-            </p>
-            <div className="hero-ctas">
-              <Link href="/contact" className="btn btn-gold">Book Call <IconArrow /></Link>
-              <Link href="/services" className="btn btn-dark">Explore</Link>
-            </div>
-            <div className="mstats" aria-label="Studio highlights">
-              {MANIFESTO_STATS.map((s) => (
-                <div key={s.label}><b>{s.value}</b><span>{s.label}</span></div>
-              ))}
-            </div>
-          </div>
-          <div className="mascot-stage">
-            <div className="daruma-sway" style={{ display: "inline-block" }}>
-              <img src="/assets/icon.svg" alt="ikigaicoding Daruma mascot" style={{ height: 200, width: "auto", display: "block", margin: "0 auto" }} />
-            </div>
-            <p style={{ color: "#e6cd96", letterSpacing: 3, fontSize: 12, fontWeight: 700, marginTop: 18 }}>DARUMA · 達磨</p>
-          </div>
-        </div>
-      </section>
 
       {/* TRUST STRIP */}
       <div className="band-emerald section-sm" style={{ borderTop: "3px solid #c9a86a" }}>
