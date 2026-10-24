@@ -104,7 +104,7 @@ export default function Home() {
                 <img src="/assets/rope.svg" alt="" aria-hidden="true" className="ref-card-rope" />
                 <h3>{s.title}</h3>
                 <p>{s.short}</p>
-                <div className="ref-ghost" aria-hidden="true">{`0${i + 1}`}</div>
+                <div className="ref-ghost" aria-hidden="true">{i + 1}</div>
                 <Link href={`/services#${s.slug}`} className="ref-pill">Learn more</Link>
               </article>
             ))}
@@ -131,7 +131,7 @@ export default function Home() {
               blank until the work is done, a daily reminder that the goal is still waiting for its other half.
             </p>
             <p className="lead on-dark">
-              Our Daruma wears its craft openly: <strong style={{ color: "#fff" }}>{"{}"} code brackets for eyes</strong>,
+              Our Daruma wears its craft openly: <strong style={{ color: "#fff" }}>{"{}}"} code brackets for eyes</strong>,
               because code is how we keep promises now, and a <strong style={{ color: "#fff" }}>hachimaki headband</strong> —
               the knot tied for hard work and focus. Knock it down and its weighted base rolls it upright, every
               single time. That is the whole philosophy of this studio.
