@@ -406,3 +406,4 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .ref-plinth i { display: block; height: 5px; background: linear-gradient(90deg, #8c7647, #d1c08b, #8c7647); }
 .ref-plinth b { display: block; height: 12px; background: linear-gradient(180deg, #d2d7dd, #aeb8bf); }
 .ref-rope { width: 240px; height: auto; display: block; margin: 0 auto 18px; }
+.ref-card-rope { width: 88px; height: auto; display: block; margin: 0 auto; }
