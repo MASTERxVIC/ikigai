@@ -200,6 +200,11 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
 .testimonial p { font-style: italic; color: #e6efe9; }
 .testimonial cite { display: block; margin-top: 14px; font-style: normal; font-size: 13px; color: var(--gold-light); font-weight: 700; }
 
+/* testimonials — bonsai watermark (right side, reference exact) */
+.testimonials .container { position: relative; z-index: 1; }
+.bonsai-wm { position: absolute; right: -20px; top: -2%; height: 102%; width: auto; opacity: .10; pointer-events: none; z-index: 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 25%); mask-image: linear-gradient(to right, transparent, black 25%); }
+
 /* ---------- SERVICE CARDS (ghost number style) ---------- */
 .svc-card { position: relative; overflow: hidden; background: #fff; border-radius: 26px; padding: 38px 34px; box-shadow: var(--shadow); border: 1px solid rgba(16,64,46,0.08); transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .svc-card:hover { transform: translateY(-6px); box-shadow: 0 26px 55px rgba(7,31,21,0.18); }
