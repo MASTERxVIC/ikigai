@@ -2,6 +2,7 @@ import Link from "next/link";
 import SectionHead from "../components/SectionHead";
 import WhatWeDoArt from "../components/WhatWeDoArt";
 import Faq from "../components/Faq";
+import FaqMandala from "/../components/FaqMandala";
 import JsonLd from "../components/JsonLd";
 import { IconArrow, IconWhatsApp } from "../components/icons";
 import WorkCard from "../components/WorkCard";
@@ -169,12 +170,18 @@ export default function Home() {
                 <cite>— {t.name}, {t.role}</cite>
               </blockquote>
             ))}
-          </div>
+              </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="section" id="faq" aria-label="Frequently asked questions">
+      <section className="section faq-sec" id="faq" aria-label="Frequently asked questions">
+        <div className="faq-mandala left" aria-hidden="true">
+          <FaqMandala />
+        </div>
+        <div className="faq-mandala right" aria-hidden="true">
+          <FaqMandala />
+        </div>
         <div className="container" style={{ maxWidth: 820 }}>
           <SectionHead center eyebrow="Questions" title="Before you ask." lead="Straight answers, no sales-speak. These are also structured for Google and AI search (AEO)." />
           <Faq items={FAQS} />
