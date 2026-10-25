@@ -112,7 +112,7 @@ export default function Home() {
               blank until the work is done, a daily reminder that the goal is still waiting for its other half.
             </p>
             <p className="lead on-dark">
-              Our Daruma wears its craft openly: <strong style={{ color: "#fff" }}>{"{}}"} code brackets for eyes</strong>,
+              Our Daruma wears its craft openly: <strong style={{ color: "#fff" }}>{"{}"} code brackets for eyes</strong>,
               because code is how we keep promises now, and a <strong style={{ color: "#fff" }}>hachimaki headband</strong> —
               the knot tied for hard work and focus. Knock it down and its weighted base rolls it upright, every
               single time. That is the whole philosophy of this studio.
@@ -158,7 +158,8 @@ export default function Home() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="dark-band section" aria-label="Testimonials">
+      <section className="dark-band section testimonials" aria-label="Testimonials">
+        <img className="bonsai-wm" src="/assets/bonsai-watermark.png" alt="" aria-hidden="true" />
         <div className="container">
           <SectionHead dark eyebrow="Kind words*" title="Clients on the record." lead="*Placeholder testimonials — your words could headline this section next." />
           <div className="grid grid-3">
@@ -194,4 +195,4 @@ export default function Home() {
       </section>
     </>
   );
-}
+                }
