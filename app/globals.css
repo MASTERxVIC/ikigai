@@ -91,7 +91,7 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
 .hero {
   position: relative; min-height: 100svh; display: flex; align-items: center;
   color: #fff; overflow: hidden;
-  background: var(--emerald-950) url("/assets/hero-bg.png") center/cover no-repeat;
+  background: var(--emerald-950) url("/assets/hero-bg.jpg") center/cover no-repeat;
 }
 .hero::before {
   content: ""; position: absolute; inset: 0;
