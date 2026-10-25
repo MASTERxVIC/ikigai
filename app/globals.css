@@ -378,9 +378,15 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .ref-services { background: #f4f5f7; padding: 104px 0; }
 .ref-work { background: linear-gradient(180deg, #f4f5f7, #e6eaed); padding: 104px 0; }
 @media (max-width: 760px) { .ref-services, .ref-work { padding: 72px 0; } }
-.ref-vert { writing-mode: vertical-rl; position: absolute; top: 50%; transform: translateY(-50%); font-weight: 700; letter-spacing: .5em; font-size: .95rem; color: rgba(140,118,71,.45); pointer-events: none; user-select: none; z-index: 2; }
+.ref-vert { writing-mode: vertical-rl; position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--font-noto-jp), "Noto Serif JP", serif; font-weight: 700; letter-spacing: .5em; font-size: .95rem; color: rgba(140,118,71,.45); pointer-events: none; user-select: none; z-index: 2; }
 .ref-vert.left { left: 26px; } .ref-vert.right { right: 26px; }
 @media (max-width: 900px) { .ref-vert { display: none; } }
+.cta-sec { position: relative; overflow: hidden; }
+.cta-sec .container { position: relative; z-index: 1; }
+.cta-kanji { writing-mode: vertical-rl; position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--font-noto-jp), "Noto Serif JP", serif; font-weight: 700; letter-spacing: .5em; font-size: .95rem; color: rgba(230,205,150,.40); pointer-events: none; user-select: none; z-index: 0; }
+.cta-kanji.left { left: 26px; }
+.cta-kanji.right { right: 26px; }
+@media (max-width: 900px) { .cta-kanji { display: none; } }
 .ref-shead { text-align: center; max-width: 720px; margin: 0 auto 54px; position: relative; z-index: 1; }
 .ref-shead h2 { margin: 14px 0 0; font-size: clamp(1.9rem, 3.6vw, 2.7rem); font-weight: 800; letter-spacing: -.015em; line-height: 1.16; color: #030b08; }
 .ref-shead p { margin: 16px auto 0; color: #4a544e; font-size: 1.03rem; max-width: 600px; }
