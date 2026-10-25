@@ -2,7 +2,7 @@ import Link from "next/link";
 import SectionHead from "../components/SectionHead";
 import WhatWeDoArt from "../components/WhatWeDoArt";
 import Faq from "../components/Faq";
-import FaqMandala from "/../components/FaqMandala";
+import FaqMandala from "../components/FaqMandala";
 import JsonLd from "../components/JsonLd";
 import { IconArrow, IconWhatsApp } from "../components/icons";
 import WorkCard from "../components/WorkCard";
