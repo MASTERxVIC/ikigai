@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Montserrat, Nunito } from "next/font/google";
+import { Montserrat, Nunito, Noto_Serif_JP } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CookieBanner from "../components/CookieBanner";
@@ -22,9 +22,17 @@ const nunito = Nunito({
   display: "swap",
 });
 
+const notoSerifJP = Noto_Serif_JP({
+  subsets: ["latin", "japanese"],
+  weight: ["700"],
+  variable: "--font-noto-jp",
+  display: "swap",
+});
+
 const SITE_URL = "https://ikigaicoding.com"; // placeholder domain
 
 export const metadata = {
+  
   metadataBase: new URL(SITE_URL),
   title: {
     default: "ikigaicoding — Custom Software, Websites & Search (SEO · GEO · AEO)",
@@ -43,7 +51,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${nunito.variable}`}>
+    <html lang="en" className={`${montserrat.variable} ${nunito.variable} ${notoSerifJP.variable}`}>
       <body>
         <IntroSplash />
         <Navbar />
