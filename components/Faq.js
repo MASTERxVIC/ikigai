@@ -1,11 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Faq({ items }) {
   const [open, setOpen] = useState(0);
+  const rootRef = useRef(null);
+
+  // The FAQ mandalas start spinning in place when the section scrolls into view.
+  useEffect(() => {
+    const section = rootRef.current?.closest("section");
+    if (!section) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          section.classList.add("spinning");
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.25 });
+    io.observe(section);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <div>
+    <div ref={rootRef}>
       {items.map((f, i) => {
         const isOpen = open === i;
         return (
@@ -14,8 +32,10 @@ export default function Faq({ items }) {
               {f.q}
               <span className="chev">▾</span>
             </button>
-            <div className="faq-a" style={{ maxHeight: isOpen ? 300 : 0 }}>
-              <p>{f.a}</p>
+            <div className="faq-a">
+              <div>
+                <p>{f.a}</p>
+              </div>
             </div>
           </div>
         );
