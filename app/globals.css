@@ -194,11 +194,18 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
 .wa-float { position: fixed; right: 22px; bottom: 22px; z-index: 60; width: 58px; height: 58px; border-radius: 50%; background: #1faa55; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
 
 /* ---------- FOOTER ---------- */
-.footer { background: var(--emerald-950); color: #d8e4db; position: relative; }
+.footer { background-color: var(--emerald-950); background-image: url("/assets/footer-art.png"); background-size: cover; background-position: center; color: #d8e4db; position: relative;}
 .footer-wave { display: block; width: 100%; height: 70px; margin-top: -1px; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 36px; padding: 20px 0 46px; }
 @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+                           /* footer art layout — approved mockup v5: columns clear of the gold ribbon */
+.footer .push-110 { padding-top: 110px; }
+.footer .push-105 { padding-top: 105px; }
+.footer .push-130 { padding-top: 130px; }
+.footer .shift-right { padding-left: 24px; }
+.footer .shift-right-more { padding-left: 40px; }
+@media (max-width: 900px) { .footer .push-110, .footer .push-105, .footer .push-130 { padding-top: 0; } .footer .shift-right, .footer .shift-right-more { padding-left: 0; } }
 .footer h4 { color: #fff; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px; }
 .footer h4::after { content: ""; display: block; width: 30px; height: 2px; background: var(--gold); margin-top: 8px; }
 .footer a { color: #b9cec0; text-decoration: none; font-size: 14.5px; display: block; padding: 5px 0; }
