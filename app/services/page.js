@@ -72,7 +72,14 @@ export default function Services() {
                     </p>
                   ) : null}
                   <div className="mt-2">
-                    <Link href="/contact" className="svc-pill">Start a project →</Link>
+                    <Link href="/contact" className="svc-pill">
+                      {"Start a project →".split("").map((ch, i) => (
+                        <span key={i} className="ch" style={{ "--d": `${i * 15}ms` }}>
+                          <span>{ch === " " ? "\u00A0" : ch}</span>
+                          <span aria-hidden="true">{ch === " " ? "\u00A0" : ch}</span>
+                        </span>
+                      ))}
+                    </Link>
                   </div>
                 </article>
               );
