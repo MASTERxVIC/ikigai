@@ -1,6 +1,7 @@
 import Link from "next/link";
+
 import PageHero from "../../components/PageHero";
-import { PROJECTS } from "../../lib/content";
+import WorkAccordion from "../../components/WorkAccordion";
 
 export const metadata = {
   title: "Work",
@@ -24,31 +25,9 @@ export default function Work() {
         lead="Real builds from the studio floor: a full-stack travel listing platform, a movie discovery app, a motion-driven agency website and a client admin system. Each one started as a goal with one eye painted in — and each one shipped."
       />
 
-      <section className="section">
-        <div className="container" style={{ maxWidth: 900 }}>
-          <div style={{ display: "grid", gap: 26 }}>
-            {PROJECTS.map((p) => (
-              <article className="glass-card" id={`case-${p.slug}`} key={p.slug} style={{ scrollMarginTop: 100 }}>
-                <div className="work-top" style={{ padding: 0 }}>
-                  <span className="monogram" aria-hidden="true">{p.monogram}</span>
-                  <span className="tag">{p.category}</span>
-                </div>
-                <h2 className="h3" style={{ fontSize: 26, margin: "16px 0 2px" }}>{p.title}</h2>
-                <span className="work-sub">{p.subtitle}</span>
-                <p style={{ color: "var(--muted)", fontSize: 15.5, marginTop: 10 }}>{p.desc}</p>
-                <h3 style={{ fontSize: 16, color: "var(--emerald-800)", marginTop: 20 }}>What was built</h3>
-                <p style={{ color: "var(--muted)", fontSize: 14.5, margin: 0 }}>{p.built}</p>
-                <div className="chips" style={{ marginTop: 16 }}>
-                  {p.chips.map((c) => <span className="chip" key={c}>{c}</span>)}
-                </div>
-                {p.live ? (
-                  <div className="case-links">
-                    <a href={p.live} target="_blank" rel="noopener" className="case-link">Visit live site →</a>
-                  </div>
-                ) : null}
-              </article>
-            ))}
-          </div>
+      <section className="section" style={{ overflowX: "clip" }}>
+        <div className="container" style={{ maxWidth: 960 }}>
+          <WorkAccordion />
 
           <div className="band-emerald cta-sec" style={{ borderRadius: 20, padding: "44px 30px", textAlign: "center", marginTop: 34 }}>
             <span className="cta-kanji left" aria-hidden="true">生き甲斐</span>
