@@ -479,12 +479,12 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .wk-body { max-height: 0; overflow: hidden; visibility: hidden; transition: max-height .4s ease, visibility 0s linear .4s; position: relative; z-index: 1; }
 .wk-acc.open .wk-body { max-height: 600px; visibility: visible; transition: max-height .4s ease, visibility 0s linear 0s; }
 .wk-body-inner { overflow: hidden; min-height: 0; padding: 0 4px 30px 56px; }
-.wk-sub { font-size: 13px; font-weight: 700; color: #a8824a; margin-bottom: 16px; }
-.wk-desc { font-size: 19px; line-height: 1.6; color: #4c5553; margin-bottom: 20px; }
-.wk-built-h { font-size: 22px; font-weight: 800; color: #1e7a52; margin-bottom: 10px; }
-.wk-built { font-size: 18px; line-height: 1.65; color: #4c5553; margin-bottom: 20px; }
+.wk-sub { font-size: 16px; font-weight: 700; color: #a8824a; margin-bottom: 16px; }
+.wk-desc { font-size: 14px; line-height: 1.6; color: #4c5553; margin-bottom: 20px; }
+.wk-built-h { font-size: 16px; font-weight: 800; color: #1e7a52; margin-bottom: 10px; }
+.wk-built { font-size: 14px; line-height: 1.65; color: #4c5553; margin-bottom: 20px; }
 .wk-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
-.wk-chip { background: #faf6ec; border: 1px solid #e3dcc8; color: #0a1f16; font-size: 15px; font-weight: 600; padding: 9px 16px; border-radius: 999px; }
+.wk-chip { background: #faf6ec; border: 1px solid #e3dcc8; color: #0a1f16; font-size: 14px; font-weight: 600; padding: 9px 16px; border-radius: 999px; }
 .wk-live { font-size: 19px; font-weight: 800; color: #155a3e; text-decoration: none; }
 .wk-live:hover { text-decoration: underline; }
 .wk-acc.wk-even { background: linear-gradient(135deg, #0b2e21, #155a3e); width: 100vw; margin-left: calc(50% - 50vw); }
@@ -526,5 +526,5 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
   .wk-clone { font-size: 22px; }
   .wk-cat { display: none; }
   .wk-body-inner { padding-left: 0; }
-  .wk-desc, .wk-built { font-size: 16px; }
+  .wk-desc, .wk-built { font-size: 14px; }
 }
