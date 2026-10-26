@@ -298,6 +298,8 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
 .mascot-stage { position: relative; border-radius: 22px; overflow: hidden; border: 1px solid rgba(201,168,106,0.4); background: var(--emerald-900); padding: 44px 30px; text-align: center; }
 .mascot-stage::before, .mascot-stage::after { content: ""; position: absolute; top: 0; bottom: 0; width: 54px; opacity: 0.5; background: repeating-linear-gradient(180deg, rgba(201,168,106,0.25) 0 14px, transparent 14px 30px); }
 .mascot-stage::before { left: 0; } .mascot-stage::after { right: 0; }
+/* ---------- DARUMA GROUND SHADOW (About official mark) ---------- */
+.daruma-ground-shadow { width: 130px; height: 20px; margin: -2px auto 0; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(7,31,21,.35) 0%, rgba(7,31,21,.18) 45%, rgba(7,31,21,0) 70%); }
 
 /* story band — eye blocks */
 .eye-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; position: relative; z-index: 1; }
