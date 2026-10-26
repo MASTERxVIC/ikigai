@@ -235,7 +235,7 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
 .svc-card:hover .svc-ghost { transform: scale(1.15); }
 .svc-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 18px; position: relative; z-index: 1; }
 .svc-ico { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--emerald-800), var(--emerald-600)); display: inline-flex; align-items: center; justify-content: center; flex: none; }
-.svc-ico svg { width: 18px; height: 18px; stroke: #fff; }
+.svc-ico svg { width: 20px; height: 20px; fill: #fff; stroke: none; }
 .svc-card h3, .svc-card h2 { font-size: clamp(24px, 2.4vw, 32px); font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; position: relative; z-index: 1; max-width: 80%; }
 .svc-card p { color: var(--muted); font-size: 14.5px; position: relative; z-index: 1; max-width: 82%; }
 .svc-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; background: var(--emerald-100); color: var(--emerald-800); font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 999px; text-decoration: none; position: relative; z-index: 1; transition: background 0.2s ease, color 0.2s ease; }
