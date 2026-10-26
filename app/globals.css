@@ -233,9 +233,9 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
 .svc-card:hover { transform: translateY(-6px); box-shadow: 0 26px 55px rgba(7,31,21,0.18); border-color: #8c7647; }
 .svc-ghost { position: absolute; right: 0; bottom: -58px; margin: 0; z-index: 0; font-family: var(--font-body), "Montserrat", sans-serif; font-weight: 900; font-size: 16rem; line-height: 1.1; color: rgba(229, 222, 196, 0.29); pointer-events: none; user-select: none; transform-origin: bottom right; transition: transform .45s ease; }
 .svc-card:hover .svc-ghost { transform: scale(1.15); }
-.svc-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--emerald-700); margin-bottom: 18px; position: relative; z-index: 1; }
-.svc-ico { display: inline-flex; align-items: center; justify-content: center; flex: none; }
-.svc-ico svg { width: 24px; height: 24px; fill: var(--gold-dark); stroke: none; }
+.svc-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 18px; position: relative; z-index: 1; }
+.svc-ico { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.svc-ico svg { width: 28px; height: 28px; fill: var(--emerald-700); stroke: none; }
 .svc-card h3, .svc-card h2 { font-size: clamp(24px, 2.4vw, 32px); font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; position: relative; z-index: 1; max-width: 80%; }
 .svc-card p { color: var(--muted); font-size: 14.5px; position: relative; z-index: 1; max-width: 82%; }
 .svc-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; background: var(--emerald-100); color: var(--emerald-800); font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 999px; text-decoration: none; position: relative; z-index: 1; transition: background 0.2s ease, color 0.2s ease; }
