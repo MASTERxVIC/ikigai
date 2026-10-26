@@ -235,7 +235,7 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
 .svc-card:hover .svc-ghost { transform: scale(1.15); }
 .svc-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 18px; position: relative; z-index: 1; }
 .svc-ico { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, var(--emerald-800), var(--emerald-600)); display: inline-flex; align-items: center; justify-content: center; flex: none; }
-.svc-ico svg { width: 28px; height: 28px; fill: var(--cream); stroke: none; }
+.svc-ico svg { width: 28px; height: 28px; fill: #fff; stroke: none; }
 .svc-card h3, .svc-card h2 { font-size: clamp(24px, 2.4vw, 32px); font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; position: relative; z-index: 1; max-width: 80%; }
 .svc-card p { color: var(--muted); font-size: 14.5px; position: relative; z-index: 1; max-width: 82%; }
 .svc-pill { display: inline-flex; align-items: center; margin-top: 22px; background: var(--emerald-100); color: var(--emerald-800); font-weight: 700; font-size: 14px; padding: 12px 22px; border-radius: 999px; text-decoration: none; position: relative; z-index: 1; line-height: 1.5em; }
@@ -243,7 +243,7 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
 .svc-pill:hover::before { opacity: 1; }
 .svc-pill .ch { position: relative; z-index: 1; display: inline-block; overflow: hidden; height: 1.5em; vertical-align: top; }
 .svc-pill .ch span { display: block; line-height: 1.5em; height: 1.5em; transition: transform .22s ease; transition-delay: var(--d); }
-.svc-pill .ch span + span { color: var(--emerald-100); }
+.svc-pill .ch span + span { color: #fff; }
 .svc-pill:hover .ch span { transform: translateY(-100%); }
 .svc-points { margin: 8px 0 0; padding: 0; list-style: none; position: relative; z-index: 1; }
 .svc-points li { font-size: 13.5px; color: var(--muted); padding: 5px 0 5px 22px; position: relative; max-width: 85%; }
