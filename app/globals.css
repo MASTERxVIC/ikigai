@@ -146,6 +146,9 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
 .dark-band { background: var(--emerald-950); color: #fff; position: relative; overflow: hidden; }
 .dark-band::before { content: ""; position: absolute; inset: 0; background: radial-gradient(700px 320px at 85% 10%, rgba(201,168,106,0.14), transparent 60%); pointer-events: none; }
 .band-emerald { background: linear-gradient(135deg, var(--emerald-900), var(--emerald-700)); color: #fff; }
+/* ---------- PAGE HERO DOLL WATERMARK (v7 spec) ---------- */
+.pagehero-doll { position: absolute; right: -10vw; top: 8%; width: 48vw; height: auto; z-index: 0; pointer-events: none; }
+@media (max-width: 900px) { .pagehero-doll { width: 68vw; right: -12vw; top: 2%; } }
 
 /* ---------- STORY ---------- */
 .story-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 50px; align-items: center; }
