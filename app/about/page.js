@@ -75,6 +75,7 @@ export default function About() {
             </p>
             <div style={{ textAlign: "center", marginTop: 26 }}>
               <img src="/assets/icon.svg" alt="ikigaicoding Daruma — the official mark" style={{ height: 120, width: "auto", margin: "0 auto" }} />
+                <div className="daruma-ground-shadow" aria-hidden="true" />
               <p style={{ color: "var(--gold-dark)", letterSpacing: 2, fontSize: 11.5, fontWeight: 700, marginTop: 12 }}>THE OFFICIAL MARK · DARUMA 達磨</p>
             </div>
           </article>
