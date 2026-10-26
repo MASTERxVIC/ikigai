@@ -57,7 +57,7 @@ export default function Services() {
           <div className="grid grid-2">
             {SERVICES.map((s, i) => {
               const Icon = SERVICE_ICONS[s.icon];
-              const num = `0${i + 1}`;
+              const num = `${i + 1}`;
               return (
                 <article className="svc-card glass-card" id={s.slug} key={s.slug} style={{ scrollMarginTop: 100 }}>
                   <span className="svc-ghost" aria-hidden="true">{num}</span>
