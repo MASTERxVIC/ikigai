@@ -2,6 +2,7 @@ import Link from "next/link";
 import SectionHead from "../../components/SectionHead";
 import PageHero from "../../components/PageHero";
 import Faq from "../../components/Faq";
+import FaqMandala from "../../components/FaqMandala";
 import JsonLd from "../../components/JsonLd";
 import HashScroll from "../../components/HashScroll";
 import { SERVICE_ICONS } from "../../components/icons";
@@ -89,7 +90,13 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="section-sm" style={{ background: "#fff" }}>
+      <section className="section-sm faq-sec" style={{ background: "#fff" }}>
+        <div className="faq-mandala left" aria-hidden="true">
+          <FaqMandala />
+        </div>
+        <div className="faq-mandala right" aria-hidden="true">
+          <FaqMandala />
+        </div>
         <div className="container" style={{ maxWidth: 820 }}>
           <SectionHead center eyebrow="Service FAQ" title="Before you ask." />
           <Faq items={pageFaqs} />

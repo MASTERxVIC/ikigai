@@ -118,7 +118,9 @@ export default function About() {
         </div>
       </section>
 
-      <section className="band-emerald section" aria-label="Call to action">
+      <section className="band-emerald section cta-sec" aria-label="Call to action">
+        <span className="cta-kanji left" aria-hidden="true">生き甲斐</span>
+        <span className="cta-kanji right" aria-hidden="true">達磨</span>
         <div className="container center">
           <span className="eyebrow on-dark">Begin</span>
           <h2 className="h2" style={{ color: "#fff", marginTop: 14 }}>Have a goal? Let&apos;s paint the first eye.</h2>
