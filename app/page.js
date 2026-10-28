@@ -5,9 +5,9 @@ import Faq from "../components/Faq";
 import FaqMandala from "../components/FaqMandala";
 import TestimonialCarousel from "../components/TestimonialCarousel";
 import JsonLd from "../components/JsonLd";
-import { IconArrow, IconWhatsApp } from "../components/icons";
+import { IconArrow } from "../components/icons";
 import WorkCard from "../components/WorkCard";
-import { SERVICES, PROJECTS, FAQS, TESTIMONIALS, STATS, WHATSAPP_LINK } from "../lib/content";
+import { SERVICES, PROJECTS, FAQS, TESTIMONIALS, STATS } from "../lib/content";
 import { orgSchema, faqSchema, SITE_URL } from "../lib/seo";
 
 export const metadata = {
@@ -192,7 +192,7 @@ export default function Home() {
           <p className="lead on-dark" style={{ margin: "0 auto 28px" }}>Tell us what you want to build. Within 24 hours you&apos;ll have clear next steps — in plain words, zero pressure.</p>
           <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/contact" className="btn btn-gold">Book Call <IconArrow /></Link>
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener" className="wa-btn"><IconWhatsApp /> WhatsApp Us</a>
+            <Link href="/contact" className="btn btn-outline">Start a Project</Link>
           </div>
         </div>
       </section>
