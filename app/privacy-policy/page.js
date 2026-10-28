@@ -25,7 +25,7 @@ export default function PrivacyPolicy() {
       <h3>2. What we collect</h3>
       <p>We collect only what an enquiry or a project actually needs:</p>
       <ul>
-        <li><strong>Details you send us</strong> — your name, email address and project details when you write through the enquiry form, by email, or over WhatsApp.</li>
+        <li><strong>Details you send us</strong> — your name, email address and project details when you write through the enquiry form, by email, or through the Daruma assistant on this site.</li>
         <li><strong>Basic technical data</strong> — device and browser type, and which pages you visited, in the ordinary course of the site being served to you.</li>
       </ul>
       <p>We do not ask for, and do not need, passwords, payment card numbers or government IDs through this website.</p>
