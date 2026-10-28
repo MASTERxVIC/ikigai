@@ -45,7 +45,7 @@ export default function WorkAccordion() {
         const num = String(i + 1).padStart(2, "0");
         const accClass = "wk-acc" + (isOpen ? " open" : "") + ((i + 1) % 2 === 0 ? " wk-even" : "");
         return (
-          <div className={accClass} key={p.slug}>
+          <div className={accClass} key={p.slug} id={`case-${p.slug}`} style={{ scrollMarginTop: 100 }}>
             <button className="wk-sum" type="button" aria-expanded={isOpen} onClick={() => handleClick(i)}>
               <span className="wk-wm" aria-hidden="true">{num}</span>
               <span className="wk-title">{p.title}</span>

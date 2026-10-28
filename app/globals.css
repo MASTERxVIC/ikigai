@@ -529,3 +529,21 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
   .wk-body-inner { padding-left: 0; }
   .wk-desc, .wk-built { font-size: 14px; }
 }
+
+/* ---------- RESPONSIVE FIXES (all-screen pass, Oct 2026) ---------- */
+/* Footer ribbon gap: desktop keeps the 100px gap, mobile does not need it. */
+.foot-gap { margin-top: 100px; }
+@media (max-width: 900px) { .foot-gap { margin-top: 0; } }
+/* Selected-work cards: fixed 300px body clips links on narrow cards — let it grow up to tablet widths. */
+@media (max-width: 960px) { .ref-proj-body { height: auto; } }
+/* Loader on small phones: narrower side rail + tighter pill so nothing crowds or wraps. */
+@media (max-width: 520px) {
+  .loader-vert-rail { width: 72px; }
+  .loader-pill { letter-spacing: 1.5px; padding: 8px 16px; font-size: 11px; }
+}
+@media (max-width: 380px) { .loader-vert-rail { display: none; } }
+/* Cookie table on small phones. */
+@media (max-width: 560px) {
+  table.cookie-table { font-size: 13px; }
+  table.cookie-table th, table.cookie-table td { padding: 8px 10px; }
+}
