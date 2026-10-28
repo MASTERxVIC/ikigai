@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { SERVICES, WHATSAPP_LINK, EMAIL } from "../lib/content";
-import { IconWhatsApp, IconMail } from "./icons";
+import { SERVICES, EMAIL } from "../lib/content";
+import { IconMail } from "./icons";
 
 export default function Footer() {
   return (
@@ -13,15 +13,11 @@ export default function Footer() {
               <div style={{ fontSize: 12, color: "#c9a86a", letterSpacing: 2 }}>FALL SEVEN TIMES, GET UP EIGHT</div>
             </div>
             <p style={{ fontSize: 14.5, color: "#b9cec0", maxWidth: 300 }}>
-              Custom software, websites and search visibility — built with a Daruma&apos;s stubbornness: knocked down, back up, every time.
+              Custom software, websites and search visibility – built with a Daruma&apos;s stubbornness: knocked down, back up, every time.
             </p>
             <div style={{ display: "flex", gap: 10, marginTop: 18 }}>
-              <a href={WHATSAPP_LINK} target="_blank" rel="noopener" aria-label="WhatsApp"
-                 style={{ width: 42, height: 42, borderRadius: "50%", background: "rgba(201,168,106,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#e6cd96" }}>
-                <IconWhatsApp />
-              </a>
               <a href={`mailto:${EMAIL}`} aria-label="Email"
-                 style={{ width: 42, height: 42, borderRadius: "50%", background: "rgba(201,168,106,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#e6cd96" }}>
+                style={{ width: 42, height: 42, borderRadius: "50%", background: "rgba(201,168,106,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#e6cd96" }}>
                 <IconMail />
               </a>
             </div>
