@@ -622,3 +622,20 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 @media (max-width: 600px) {
   .ref-svc { min-height: 340px; }
 }
+
+/* ---------- BATCH 5 (Oct 2026) ---------- */
+/* Work cards on mobile: fainter watermark letter + smaller kind/subtitle.
+   Desktop/tablet unchanged. */
+@media (max-width: 600px) {
+  .ref-glyph-svg text { opacity: .35; }
+  .ref-kind { font-size: .6rem; }
+  .ref-tag { font-size: .8rem; }
+}
+
+
+
+
+
+
+
+
