@@ -62,6 +62,9 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
   cursor: pointer; border: none; font-family: var(--font);
 }
 .btn:hover { transform: translateY(-2px); }
+
+
+
 .btn-gold { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--emerald-950); box-shadow: 0 10px 26px rgba(201, 168, 106, 0.35); }
 .btn-gold:hover { box-shadow: 0 14px 32px rgba(201, 168, 106, 0.5); }
 .btn-outline { border: 2px solid rgba(255,255,255,0.55); color: #fff; background: transparent; }
@@ -546,4 +549,50 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 @media (max-width: 560px) {
   table.cookie-table { font-size: 13px; }
   table.cookie-table th, table.cookie-table td { padding: 8px 10px; }
+}
+
+
+/* ---------- TABLET/MOBILE BATCH (Oct 2026) — desktop untouched ---------- */
+/* Cookie banner: text on its own row, Accept + Decline share one row. */
+@media (max-width: 960px) {
+  .cookie-banner p { flex-basis: 100%; }
+}
+/* Hero stats: centered on tablet/mobile. */
+@media (max-width: 960px) {
+  .hero-stats { justify-content: center; }
+  .hero-stats > div { text-align: center; }
+}
+/* Trust strip: text + button both centered on tablet/mobile.
+   justify-content needs !important — the container sets it inline. */
+@media (max-width: 960px) {
+  .trust-strip { flex-direction: column; justify-content: center !important; text-align: center; }
+  .trust-strip p { text-align: center; }
+}
+/* Selected-work cards: the roll track's 200%/50% geometry inflates the
+   body on tablet/mobile (huge gap above the links) — let copies size
+   naturally and put the links back in normal flow. Desktop 300px body
+   with bottom-pushed links is unchanged. */
+@media (max-width: 960px) {
+  .ref-roll-track { height: auto; }
+  .ref-roll-copy { height: auto; }
+  .ref-roll-copy > .ref-proj-link:first-of-type { margin-top: 20px; }
+}
+/* Testimonials carousel: desktop = same 3-col grid as before; tablet/
+   mobile = single-row auto-sliding track (transform set by the component).
+   The min-width rule keeps the grid unshifted on desktop. */
+.testi-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+@media (min-width: 961px) { .testi-track { transform: none !important; } }
+@media (max-width: 960px) {
+  .testi-viewport { overflow: hidden; }
+  .testi-track { display: flex; gap: 0; transition: transform .6s ease; }
+  .testi-track .testimonial { flex: 0 0 100%; }
+}
+/* Footer on tablet/mobile: no image — the green gradient everywhere. */
+@media (max-width: 960px) {
+  .footer { background: linear-gradient(135deg, #0b2e21, #155a3e); }
+}
+/* Hero buttons: same row on mobile (tablet already shows them in a row).
+   Overrides the earlier ≤700px full-width stacking rule. */
+@media (max-width: 700px) {
+  .hero-ctas .btn { width: auto; flex: 1; justify-content: center; padding: 12px 10px; font-size: 14px; }
 }
