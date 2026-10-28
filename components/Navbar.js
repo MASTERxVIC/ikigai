@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV_LINKS, WHATSAPP_LINK } from "../lib/content";
+import { NAV_LINKS } from "../lib/content";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,7 +34,7 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <a className="nav-cta" href={WHATSAPP_LINK} target="_blank" rel="noopener">Book Call →</a>
+          <Link className="nav-cta" href="/contact">Book Call →</Link>
         </div>
       </div>
     </nav>
