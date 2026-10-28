@@ -258,8 +258,7 @@ export default function DarumaAssistant() {
       )}
       <button className="daruma-btn" onClick={() => setOpen(!open)} aria-label={open ? "Close Daruma assistant" : "Chat with Daruma"}>
         <img src="/assets/icon.svg" alt="Daruma assistant" />
-        <span className="daruma-dot" />
-      </button>
+        button>
     </>
   );
 }
