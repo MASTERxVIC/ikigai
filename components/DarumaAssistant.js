@@ -205,13 +205,13 @@ export default function DarumaAssistant() {
       {open && (
         <div className="daruma-panel" role="dialog" aria-label="Chat with Daruma">
           <div className="daruma-head">
-            <div className="daruma-ava">
-              <div className={`daruma-expr-${expr}`}>
-                <img src="/assets/icon.svg" alt="Daruma" />
-              </div>
+            <div className="daruma-head-row">
+              <div className="daruma-ava">
+                                <div className={`daruma-expr-${expr}`}>
+                                <img src="/assets/icon.svg" alt="Daruma" />
             </div>
             <div>
-              <b>Daruma</b>
+              <b className="daruma-name">Daruma</b>
               <span>Your studio guide · replies instantly</span>
             </div>
             <button className="daruma-close" onClick={() => setOpen(false)} aria-label="Close chat">×</button>
@@ -258,7 +258,7 @@ export default function DarumaAssistant() {
       )}
       <button className="daruma-btn" onClick={() => setOpen(!open)} aria-label={open ? "Close Daruma assistant" : "Chat with Daruma"}>
         <img src="/assets/icon.svg" alt="Daruma assistant" />
-        button>
+              </button>
     </>
   );
 }
