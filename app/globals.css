@@ -645,3 +645,13 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .ref-glyph-svg text { opacity: .35; }
 .ref-kind { font-size: .6rem; }
 .ref-tag { font-size: .8rem; }
+
+/* ---------- BATCH 7 (Oct 2026) ---------- */
+/* PageHero doll on mobile: approved v2 framing — bigger + lower, only left
+   eye + smile visible, slightly less than half body. Desktop untouched. */
+@media (max-width: 900px) {
+  .pagehero-doll { width: 120vw; right: -48vw; top: 31%; }
+}
+/* Eyebrow dash: decorative gold bar removed site-wide (it carried no
+   meaning anywhere — PageHero + section eyebrows). */
+.eyebrow::before, .center .eyebrow::after { display: none; }
