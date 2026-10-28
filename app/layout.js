@@ -4,8 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CookieBanner from "../components/CookieBanner";
 import IntroSplash from "../components/IntroSplash";
-import { IconWhatsApp } from "../components/icons";
-import { WHATSAPP_LINK } from "../lib/content";
+import DarumaAssistant from "../components/DarumaAssistant";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -32,10 +31,9 @@ const notoSerifJP = Noto_Serif_JP({
 const SITE_URL = "https://ikigaicoding.com"; // placeholder domain
 
 export const metadata = {
-  
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "ikigaicoding — Custom Software, Websites & Search (SEO · GEO · AEO)",
+    default: "ikigaicoding – Custom Software, Websites & Search (SEO · GEO · AEO)",
     template: "%s | ikigaicoding",
   },
   description:
@@ -58,15 +56,7 @@ export default function RootLayout({ children }) {
         <main>{children}</main>
         <Footer />
         <CookieBanner />
-        <a
-          href={WHATSAPP_LINK}
-          target="_blank"
-          rel="noopener"
-          className="wa-float"
-          aria-label="Chat on WhatsApp"
-        >
-          <IconWhatsApp />
-        </a>
+        <DarumaAssistant />
       </body>
     </html>
   );
