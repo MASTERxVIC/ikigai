@@ -31,7 +31,7 @@ export default function Footer() {
             <Link href="/">Home</Link>
             <Link href="/services">Services</Link>
             <Link href="/work">Work</Link>
-            <Link href="/about" style={{ marginTop: 100 }}>About</Link>
+            <Link href="/about" className="foot-gap">About</Link>
             <Link href="/contact">Contact</Link>
             <Link href="/#faq">FAQ</Link>
           </nav>
