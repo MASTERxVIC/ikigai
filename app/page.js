@@ -3,6 +3,7 @@ import SectionHead from "../components/SectionHead";
 import WhatWeDoArt from "../components/WhatWeDoArt";
 import Faq from "../components/Faq";
 import FaqMandala from "../components/FaqMandala";
+import TestimonialCarousel from "../components/TestimonialCarousel";
 import JsonLd from "../components/JsonLd";
 import { IconArrow, IconWhatsApp } from "../components/icons";
 import WorkCard from "../components/WorkCard";
@@ -60,7 +61,7 @@ export default function Home() {
 
       {/* TRUST STRIP */}
       <div className="band-emerald section-sm" style={{ borderTop: "3px solid #c9a86a" }}>
-        <div className="container" style={{ display: "flex", gap: 26, flexWrap: "wrap", alignItems: "center", justifyContent: "space-between" }}>
+        <div className="container trust-strip" style={{ display: "flex", gap: 26, flexWrap: "wrap", alignItems: "center", justifyContent: "space-between" }}>
           <p style={{ margin: 0, fontWeight: 700, fontSize: 17, maxWidth: 520 }}>
             One studio for everything digital — <span style={{ color: "#e6cd96" }}>software, websites, and being found.</span>
           </p>
@@ -163,14 +164,7 @@ export default function Home() {
         <img className="bonsai-wm" src="/assets/bonsai-watermark.png" alt="" aria-hidden="true" />
         <div className="container">
           <SectionHead dark eyebrow="Kind words*" title="Clients on the record." lead="*Placeholder testimonials — your words could headline this section next." />
-          <div className="grid grid-3">
-            {TESTIMONIALS.map((t, i) => (
-              <blockquote className="testimonial" key={i} style={{ margin: 0 }}>
-                <p>&quot;{t.quote}&quot;</p>
-                <cite>— {t.name}, {t.role}</cite>
-              </blockquote>
-            ))}
-              </div>
+                      <TestimonialCarousel items={TESTIMONIALS} />
         </div>
       </section>
 
