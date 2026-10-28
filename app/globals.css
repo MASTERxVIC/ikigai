@@ -614,3 +614,11 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .testi-nav { display: none; gap: 12px; justify-content: center; margin-top: 24px; }
 .testi-nav button { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid rgba(201,168,106,.6); background: transparent; color: #e6cd96; font-size: 20px; line-height: 1; cursor: pointer; }
 @media (max-width: 960px) { .testi-nav { display: flex; } }
+
+
+/* ---------- BATCH 4 (Oct 2026) ---------- */
+/* Home service cards on mobile: a little less tall (420px → 340px).
+   Desktop/tablet unchanged. */
+@media (max-width: 600px) {
+  .ref-svc { min-height: 340px; }
+}
