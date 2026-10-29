@@ -218,13 +218,15 @@ export default function DarumaAssistant() {
         <div className="daruma-panel" role="dialog" aria-label="Chat with Daruma">
           <div className="daruma-head">
             <div className="daruma-head-row">
-                            <div className="daruma-ava">
-                                                                <img ref={headImgRef} src="/assets/icon.svg" alt="Daruma" />
-    </div>
-              <b className="daruma-name">Daruma</b>
+              <div className="daruma-ava">
+                <img ref={headImgRef} src="/assets/icon.svg" alt="Daruma" />
+              </div>
+              <div className="daruma-head-titles">
+                <b className="daruma-name">Daruma</b>
+                <div className="daruma-head-tag">Smart Assistant</div>
+              </div>
               <button className="daruma-close" onClick={() => setOpen(false)} aria-label="Close chat">×</button>
             </div>
-            <div className="daruma-head-sub">Your studio guide · replies instantly</div>
           </div>
           <div className="daruma-msgs" ref={scrollRef}>
             {msgs.map((m, i) => (

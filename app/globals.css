@@ -664,12 +664,13 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .daruma-btn { position: fixed; right: 22px; bottom: 22px; z-index: 60; background: none; border: none; box-shadow: none; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; animation: daruma-bob 3s ease-in-out infinite; perspective: 600px;}
 .daruma-btn img { width: 58px; height: auto; display: block; transform-style: preserve-3d;}
 .daruma-panel { position: fixed; right: 22px; bottom: 100px; z-index: 130; width: min(360px, calc(100vw - 32px)); background: #fff; border-radius: 18px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); overflow: hidden; font-family: var(--font); }
-.daruma-head { background: var(--emerald-950); color: #fff; padding: 14px 14px 12px; }
+.daruma-head { background: var(--emerald-950); color: #fff; padding: 10px 14px; }
 .daruma-ava { width: 44px; height: 44px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; flex: none; overflow: hidden;  perspective: 400px;}
 .daruma-ava img { width: 34px; height: auto; display: block; }
 .daruma-head-row { display: flex; align-items: center; gap: 12px; }
 .daruma-name { font-size: 16px; }
-.daruma-head-sub { font-size: 11.5px; color: #bcd2c2; margin-top: 3px; padding-left: 56px; }
+.daruma-head-titles { display: flex; flex-direction: column; justify-content: center; line-height: 1.2; }
+.daruma-head-tag { font-size: 11.5px; color: #bcd2c2; margin-top: 1px; }
 .daruma-close { margin-left: auto; background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; line-height: 1; }
 .daruma-msgs { padding: 14px; display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; background: #faf6ec; }
 .daruma-msg { max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13.5px; line-height: 1.55; }
