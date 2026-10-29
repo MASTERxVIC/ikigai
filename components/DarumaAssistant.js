@@ -10,7 +10,7 @@ import { SERVICES, PROJECTS, FAQS, EMAIL } from "../lib/content";
 // Daruma asks for their details in the chat and hands them a ready-to-send
 // email to the studio (mailto — the same pattern as the contact page).
 
-const GREETING = "Hi! I'm <b>Daruma</b> — the studio's own Daruma. Ask me about services, our work, or how we work — I'll guide you to the right next step. Fall seven times, get up eight!";
+const GREETING = "<p>Hi! I'm <b>Daruma</b> — the studio's own Daruma.</p><p>Ask me about services, our work, or how we work — I'll guide you to the right next step.</p><p>Fall seven times, get up eight!</p>";
 
 const SERVICE_KEYS = [
   { keys: ["geo", "generative", "ai search", "chatgpt", "ai answer"], slug: "geo" },
@@ -34,7 +34,7 @@ function serviceAnswer(slug) {
 function brain(text) {
   const t = text.toLowerCase();
   if (/^(hi|hello|hey|namaste|hii+)\b/.test(t.trim())) {
-    return "Hello! Great to see you here. " + GREETING;
+    return "<p>Hello! Great to see you here.</p>" + GREETING;
   }
   if (t.includes("daruma") || t.includes("doll") || t.includes("ikigai") || t.includes("perseverance") || t.includes("fall seven")) {
     return "The Daruma is a Japanese doll of <b>perseverance — fall seven times, get up eight</b>. Its eyes are <b>{}</b> — code brackets — and it wears a hachimaki headband for hard work and focus. That is the studio's operating system: we keep rising until the second eye can be painted in.";
@@ -43,13 +43,13 @@ function brain(text) {
     if (m.keys.some((k) => t.includes(k))) return serviceAnswer(m.slug);
   }
   if (t.includes("service")) {
-    return "We have <b>eight crafts</b>: " + SERVICES.map((s) => s.title).join(", ") + ". Pick one, or let the studio carry the whole wall — full details are on the Services page.<br><a class=\"daruma-guide\" href=\"/services\">Explore all 8 services →</a>";
+    return "We have <b>eight crafts</b>:<ul>" + SERVICES.map((s) => "<li>" + s.title + "</li>").join("") + "</ul>Pick one, or let the studio carry the whole wall — full details are on the Services page.<br><a class=\"daruma-guide\" href=\"/services\">Explore all 8 services →</a>";
   }
   if (t.includes("process") || t.includes("how do you work") || t.includes("steps")) {
-    return "Three steps: <b>1)</b> You send the enquiry — two minutes, in your own words. <b>2)</b> We reply within 24 hours with questions or a quote. <b>3)</b> We agree scope, timeline and price in writing — then we build until the second eye can be painted in.";
+    return "Three steps:<ol><li>You send the enquiry — two minutes, in your own words.</li><li>We reply <b style=\"color:var(--emerald-700)\">within 24 hours</b> with questions or a quote.</li><li>We agree scope, timeline and price in writing — then we build until the second eye can be painted in.</li></ol>";
   }
   if (t.includes("work") || t.includes("project") || t.includes("portfolio") || t.includes("built") || t.includes("example")) {
-    return "Four builds so far: " + PROJECTS.map((p) => "<b>" + p.title + "</b> (" + p.subtitle + ")").join(", ") + ".<br><a class=\"daruma-guide\" href=\"/work\">See the work →</a>";
+    return "Four builds so far:<ul>" + PROJECTS.map((p) => "<li><b>" + p.title + "</b> (" + p.subtitle + ")</li>").join("") + "</ul><br><a class=\"daruma-guide\" href=\"/work\">See the work →</a>";
   }
   if (t.includes("how long") || t.includes("timeline") || t.includes("take")) {
     const f = FAQS.find((x) => x.q.toLowerCase().includes("how long"));
@@ -60,7 +60,7 @@ function brain(text) {
     return (f ? f.a : "It depends on scope — tell us what you need and you will get an honest, itemized quote. No hidden charges, ever.") + " Want a quote for your project? I can pass your details to the studio.";
   }
   if (t.includes("contact") || t.includes("call") || t.includes("start") || t.includes("hire") || t.includes("enquiry")) {
-    return "Easiest start: tell us your goal on the Contact page — two minutes, your own words — and you will have clear next steps within 24 hours. No spam, no sales script.";
+    return "Easiest start: tell us your goal on the Contact page — two minutes, your own words — and you will have clear next steps <b style=\"color:var(--emerald-700)\">within 24 hours</b>. No spam, no sales script.";
   }
   return "I can help with <b>services</b>, our <b>work</b>, the <b>process</b>, the <b>Daruma story</b>, or <b>getting started</b> — try one of the suggestions below.";
 }
@@ -108,7 +108,7 @@ export default function DarumaAssistant() {
     setLeadOffered(true);
     push({
       from: "daruma",
-      html: "Want me to pass your details to the studio? They reply within 24 hours.",
+      html: "Want me to pass your details to the studio? They reply <b style=\"color:var(--emerald-700)\">within 24 hours</b>.",
       buttons: [
         { label: "Yes, share details", action: "lead-yes" },
         { label: "No, just browsing", action: "lead-no" },
@@ -176,7 +176,7 @@ export default function DarumaAssistant() {
       push({ from: "daruma", html: "Let's start fresh — what's your name?" });
     } else if (action === "lead-send") {
       setLead({ ...lead, step: "sent" });
-      push({ from: "daruma", html: "Your email app should have opened with the message ready — just hit send! Your details aren't stored anywhere; they only go in that email. The studio replies within 24 hours.<br><a class=\"daruma-guide\" href=\"/contact\">Or use the Contact page instead →</a>" });
+      push({ from: "daruma", html: "Your email app should have opened with the message ready — just hit send! Your details aren't stored anywhere; they only go in that email. The studio replies <b style=\"color:var(--emerald-700)\">within 24 hours</b>.<br><a class=\"daruma-guide\" href=\"/contact\">Or use the Contact page instead →</a>" });
     }
   };
 
