@@ -675,6 +675,10 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .daruma-msg { max-width: 85%; padding: 10px 13px; border-radius: 14px; font-size: 13.5px; line-height: 1.55; }
 .daruma-bubble { background: #fff; border: 1px solid #e3dcc8; align-self: flex-start; border-bottom-left-radius: 4px; color: #1a1a1a; }
 .daruma-bubble.typing { color: #8fa79a; font-style: italic; }
+.daruma-bubble p { margin: 0 0 8px; }
+.daruma-bubble p:last-child { margin-bottom: 0; }
+.daruma-bubble ul, .daruma-bubble ol { margin: 8px 0 4px 20px; padding: 0; }
+.daruma-bubble li { margin: 0 0 4px; }
 .user-bubble { background: var(--emerald-700); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; margin-left: auto; }
 .daruma-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
 .daruma-action { border: 1.5px solid var(--gold); background: #fff; color: var(--emerald-700); font-weight: 700; font-size: 12.5px; border-radius: 999px; padding: 8px 14px; cursor: pointer; font-family: var(--font); text-decoration: none; }

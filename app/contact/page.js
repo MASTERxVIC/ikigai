@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ContactForm from "../../components/ContactForm";
+import FaqMandala from "../../components/FaqMandala";
 import PageHero from "../../components/PageHero";
 import { IconMail, IconPin } from "../../components/icons";
 import { EMAIL } from "../../lib/content";
@@ -32,7 +33,13 @@ export default function Contact() {
         lead="Tell us what you want to build — custom software, a website that converts, an online store, or search visibility that compounds. Two minutes now, a clear reply within 24 hours."
       />
 
-      <section className="section">
+      <section className="section faq-sec">
+                <div className="faq-mandala left" aria-hidden="true">
+                              <FaqMandala />
+          </div>
+                          <div className="faq-mandala right" aria-hidden="true">
+                              <FaqMandala />
+          </div>
         <div className="container contact-grid">
           <div className="form-card">
             <ContactForm />

@@ -1,8 +1,27 @@
+"use client";
+import { useEffect, useRef } from "react";
 // B1 Lotus mandala (same design as the What we do section art) — used as a
-// half-visible spinning decoration on the FAQ section edges.
+// half-visible spinning decoration on the FAQ section edges. It starts its
+// own section spinning when scrolled into view, so it works on any page
+// (Home FAQ, Services FAQ, Contact form section) without extra wiring.
 export default function FaqMandala() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const section = ref.current?.closest("section");
+    if (!section) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          section.classList.add("spinning");
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.25 });
+    io.observe(section);
+    return () => io.disconnect();
+  }, []);
   return (
-    <svg viewBox="0 0 420 420" aria-hidden="true">
+    <svg ref={ref} viewBox="0 0 420 420" aria-hidden="true">
       <g fill="none" stroke="#a8824a">
       <circle cx="410.0" cy="210.0" r="2.4" fill="#a8824a" stroke="none" />
       <circle cx="408.3" cy="236.1" r="2.4" fill="#a8824a" stroke="none" />
