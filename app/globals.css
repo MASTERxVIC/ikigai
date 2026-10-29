@@ -693,3 +693,46 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
   .daruma-btn { right: 16px; bottom: 16px; }
   .daruma-panel { right: 16px; bottom: 94px; }
 }
+/* ---------- NAV HOVER FILL + CLICK SWOOSH ---------- */
+/* Hover: gold fills the link text left to right, like liquid. The active
+   (selected) link stays fully gold. Book Call button untouched. */
+.nav-links a:not(.nav-cta) { position: relative; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .nav-links a:not(.nav-cta) {
+    background: linear-gradient(to right, var(--gold-light) 50%, rgba(255,255,255,0.85) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    transition: background-position .5s ease;
+  }
+  .nav-links a:not(.nav-cta):hover { background-position: 0 0; }
+  .nav-links a:not(.nav-cta).active { background-position: 0 0; }
+}
+/* Click: same swoosh as the /work titles — label slides + 3 gold clones trail it. */
+.nav-label { position: relative; white-space: nowrap; }
+.nav-label.swoosh { animation: nav-title-swoosh .45s ease forwards; }
+.nav-clone { position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-size: 14px; font-weight: 600; letter-spacing: 0.4px; white-space: nowrap; opacity: 0; pointer-events: none; color: var(--gold-light); -webkit-text-fill-color: var(--gold-light); }
+.nav-clone.c1 { --peak: .55; }
+.nav-clone.c2 { --peak: .35; }
+.nav-clone.c3 { --peak: .18; }
+.nav-links a.swooshing .nav-clone.c1 { animation: nav-clone-swoosh .45s ease .05s forwards; }
+.nav-links a.swooshing .nav-clone.c2 { animation: nav-clone-swoosh .45s ease .10s forwards; }
+.nav-links a.swooshing .nav-clone.c3 { animation: nav-clone-swoosh .45s ease .15s forwards; }
+.nav-links a.swooshing .nav-label { -webkit-text-fill-color: var(--gold-light); color: var(--gold-light); }
+@keyframes nav-title-swoosh {
+  0% { left: 0; opacity: 1; animation-timing-function: ease-in; }
+  35% { left: 54%; opacity: 0; }
+  36% { left: -30%; opacity: 0; animation-timing-function: ease-out; }
+  100% { left: 0; opacity: 1; }
+}
+@keyframes nav-clone-swoosh {
+  0% { left: 0; opacity: 0; animation-timing-function: ease-in; }
+  20% { left: 30%; opacity: var(--peak); }
+  35% { left: 54%; opacity: 0; }
+  36% { left: -30%; opacity: 0; animation-timing-function: ease-out; }
+  70% { left: -10%; opacity: var(--peak); }
+  100% { left: 0; opacity: 0; }
+}
