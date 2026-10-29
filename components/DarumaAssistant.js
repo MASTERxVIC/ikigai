@@ -69,22 +69,40 @@ export default function DarumaAssistant() {
   const [open, setOpen] = useState(false);
   const [msgs, setMsgs] = useState([{ from: "daruma", html: GREETING }]);
   const [input, setInput] = useState("");
-  const [expr, setExpr] = useState("idle");
   const [lead, setLead] = useState(null); // { step, name, email, project }
   const [leadOffered, setLeadOffered] = useState(false);
   const scrollRef = useRef(null);
+    const btnImgRef = useRef(null);
+    const headImgRef = useRef(null);
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [msgs, open]);
+  // One shared flip clock for BOTH logos (outer button + header avatar):
+    // every 5s cycle - hold ~3.6s, flip (rotateY 360deg) over ~1.4s. Both imgs read
+    // the same clock, so they always flip in sync, even if the panel opens mid-cycle.
+    // The outer logo looks exactly as before (same 5s flip, same bob); only its
+    // driver changed from CSS to this clock so the header can sync with it.
+    useEffect(() => {
+          let raf;
+          const start = performance.now();
+          const easeInOut = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+          const tick = (now) => {
+                  const cycle = (now - start) % 5000;
+                  const rot = cycle < 3600 ? 0 : easeInOut((cycle - 3600) / 1400) * 360;
+                  const t = "rotateY(" + rot + "deg)";
+                  if (btnImgRef.current) btnImgRef.current.style.transform = t;
+                  if (headImgRef.current) headImgRef.current.style.transform = t;
+                  raf = requestAnimationFrame(tick);
+          };
+          raf = requestAnimationFrame(tick);
+          return () => cancelAnimationFrame(raf);
+    }, []);
 
+  
   const push = (m) => setMsgs((prev) => [...prev, m]);
 
-  const happyThenIdle = () => {
-    setExpr("happy");
-    setTimeout(() => setExpr("idle"), 1300);
-  };
-
+  
   const offerLead = () => {
     if (leadOffered || lead) return;
     setLeadOffered(true);
@@ -99,13 +117,11 @@ export default function DarumaAssistant() {
   };
 
   const answer = (text) => {
-    setExpr("thinking");
     const typing = { from: "daruma", html: "…", typing: true };
     setMsgs((prev) => [...prev, typing]);
     setTimeout(() => {
       setMsgs((prev) => prev.filter((m) => !m.typing));
       push({ from: "daruma", html: brain(text) });
-      happyThenIdle();
       if (INTEREST_RE.test(text.toLowerCase())) setTimeout(offerLead, 600);
     }, 750);
   };
@@ -175,10 +191,8 @@ export default function DarumaAssistant() {
         push({ from: "daruma", html: "No worries — stopped. Ask me anything else, or open the Contact page whenever you're ready." });
         return;
       }
-      setExpr("thinking");
       setTimeout(() => {
         handleLeadStep(text);
-        setExpr("idle");
       }, 500);
       return;
     }
@@ -188,11 +202,9 @@ export default function DarumaAssistant() {
   const chip = (label) => {
     push({ from: "user", html: label });
     if (label === "How do I start?") {
-      setExpr("thinking");
       setTimeout(() => {
         setMsgs((prev) => prev.filter((m) => !m.typing));
         push({ from: "daruma", html: brain("start") });
-        happyThenIdle();
         setTimeout(offerLead, 600);
       }, 750);
       return;
@@ -207,10 +219,8 @@ export default function DarumaAssistant() {
           <div className="daruma-head">
             <div className="daruma-head-row">
                             <div className="daruma-ava">
-                                                <div className={`daruma-expr-${expr}`}>
-                                                  <img src="/assets/icon.svg" alt="Daruma" />
-            </div>
-                          </div>
+                                                                <img ref={headImgRef} src="/assets/icon.svg" alt="Daruma" />
+    </div>
               <b className="daruma-name">Daruma</b>
               <button className="daruma-close" onClick={() => setOpen(false)} aria-label="Close chat">×</button>
             </div>
@@ -257,8 +267,8 @@ export default function DarumaAssistant() {
         </div>
       )}
       <button className="daruma-btn" onClick={() => setOpen(!open)} aria-label={open ? "Close Daruma assistant" : "Chat with Daruma"}>
-        <img src="/assets/icon.svg" alt="Daruma assistant" />
-              </button>
-    </>
+                <img ref={btnImgRef} src="/assets/icon.svg" alt="Daruma assistant" />
+        </button>
+        </>
   );
 }
