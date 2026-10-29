@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { SERVICES, PROJECTS, FAQS, EMAIL } from "../lib/content";
@@ -29,8 +28,6 @@ const INTEREST_RE = /want|need|looking for|interested|hire|quote|price|cost|star
 // (bubbles render as HTML). Without this, a name/project containing markup
 // would render as HTML in the visitor's own chat.
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-
-
 
 function serviceAnswer(slug) {
   const s = SERVICES.find((x) => x.slug === slug);
