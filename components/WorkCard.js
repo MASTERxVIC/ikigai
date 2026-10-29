@@ -126,7 +126,7 @@ export default function WorkCard({ p }) {
         ))}
       </div>
       {p.live ? (
-        <a href={p.live} target="_blank" rel="noopener" className="ref-proj-link" tabIndex={hidden ? -1 : undefined}>Visit live site →</a>
+        <a href={p.live} target="_blank" rel="noopener noreferrer" className="ref-proj-link" tabIndex={hidden ? -1 : undefined}>Visit live site →</a>
       ) : null}
       <Link href={`/work#case-${p.slug}`} className="ref-proj-link" tabIndex={hidden ? -1 : undefined}>Read the case study →</Link>
     </>
