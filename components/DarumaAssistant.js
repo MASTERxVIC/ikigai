@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { SERVICES, PROJECTS, FAQS, EMAIL } from "../lib/content";
@@ -24,6 +25,12 @@ const SERVICE_KEYS = [
 ];
 
 const INTEREST_RE = /want|need|looking for|interested|hire|quote|price|cost|start|build|project|contact|call|help (me|us)/;
+// Escape visitor-typed text before it is interpolated into a Daruma bubble
+// (bubbles render as HTML). Without this, a name/project containing markup
+// would render as HTML in the visitor's own chat.
+const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+
 
 function serviceAnswer(slug) {
   const s = SERVICES.find((x) => x.slug === slug);
@@ -132,7 +139,7 @@ export default function DarumaAssistant() {
       const name = text.trim();
       if (!name) return;
       setLead({ ...lead, step: "email", name });
-      push({ from: "daruma", html: "Thanks " + name + "! And your email, so the studio can reply?" });
+      push({ from: "daruma", html: "Thanks " + esc(name) + "! And your email, so the studio can reply?" });
       return;
     }
     if (step === "email") {
@@ -151,7 +158,7 @@ export default function DarumaAssistant() {
       setLead({ ...lead, step: "confirm", project });
       push({
         from: "daruma",
-        html: "Here's what I'll send to the studio:<br><b>Name:</b> " + lead.name + "<br><b>Email:</b> " + lead.email + "<br><b>Project:</b> " + project,
+        html: "Here's what I'll send to the studio:<br><b>Name:</b> " + esc(lead.name) + "<br><b>Email:</b> " + esc(lead.email) + "<br><b>Project:</b> " + esc(project),
         buttons: [
           { label: "Send message →", action: "lead-send" },
           { label: "Start over", action: "lead-restart" },
