@@ -668,7 +668,7 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
 .daruma-btn img { width: 58px; height: auto; display: block; transform-style: preserve-3d; animation: daruma-spin 5s ease-in-out infinite;}
 .daruma-panel { position: fixed; right: 22px; bottom: 100px; z-index: 130; width: min(360px, calc(100vw - 32px)); background: #fff; border-radius: 18px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); overflow: hidden; font-family: var(--font); }
 .daruma-head { background: var(--emerald-950); color: #fff; padding: 14px 14px 12px; }
-.daruma-ava { width: 44px; height: 44px; border-radius: 50%; background: #fdfcf8; display: flex; align-items: center; justify-content: center; flex: none; overflow: hidden; }
+.daruma-ava { width: 44px; height: 44px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; flex: none; overflow: hidden; }
 .daruma-ava img { width: 34px; height: auto; display: block; }
 .daruma-expr-idle { animation: daruma-bob 3s ease-in-out infinite; }
 .daruma-expr-thinking { animation: daruma-tilt 1.1s ease-in-out infinite; }
