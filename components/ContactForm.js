@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { IconMail } from "./icons";
+import EnquiryToast from "./EnquiryToast";
 import { SERVICES, EMAIL } from "../lib/content";
 
 const SERVICE_OPTIONS = [...SERVICES.map((s) => s.title), "Something else"];
@@ -9,12 +10,16 @@ const SERVICE_OPTIONS = [...SERVICES.map((s) => s.title), "Something else"];
 export default function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", service: SERVICE_OPTIONS[0], message: "" });
   const [ready, setReady] = useState(false);
+  const [toast, setToast] = useState(false);
+  const [toastKey, setToastKey] = useState(0);
 
   const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
   const submit = (e) => {
     e.preventDefault();
     setReady(true);
+    setToastKey((k) => k + 1);
+    setToast(true);
   };
 
   const mailto = () => {
@@ -25,8 +30,7 @@ export default function ContactForm() {
     return `mailto:${EMAIL}?subject=${subject}&body=${body}`;
   };
 
-  if (ready) {
-    return (
+  const body = ready ? (
       <div className="ready-panel" role="status">
         <h2 className="h3" style={{ color: "var(--emerald-800)", fontSize: 22 }}>Your enquiry is ready.</h2>
         <p style={{ color: "var(--muted)", fontSize: 15 }}>
@@ -42,10 +46,7 @@ export default function ContactForm() {
           </button>
         </div>
       </div>
-    );
-  }
-
-  return (
+    ) : (
     <form onSubmit={submit} aria-label="Project enquiry form">
       <div className="field">
         <label htmlFor="name">Your name</label>
@@ -79,5 +80,12 @@ export default function ContactForm() {
         No spam, no cold calls — just a reply about your project.
       </p>
     </form>
+  );
+
+  return (
+    <>
+      {body}
+      {toast && <EnquiryToast key={toastKey} onClose={() => setToast(false)} />}
+    </>
   );
 }
