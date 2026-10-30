@@ -737,3 +737,21 @@ table.cookie-table th { background: var(--emerald-100); color: var(--emerald-800
   70% { left: -10%; opacity: var(--peak); }
   100% { left: 0; opacity: 0; }
 }
+/* ---------- ENQUIRY TOAST ---------- */
+/* Appears on contact enquiry submit. Desktop: bottom-right above the Daruma
+   button. Mobile: full width above the Daruma button. */
+.enq-toast { position: fixed; right: 22px; bottom: 100px; width: 360px; max-width: calc(100vw - 44px); background: #fff; border: 1.5px solid #e3dcc8; border-radius: 14px; box-shadow: 0 18px 40px rgba(7,31,21,.18); padding: 14px 14px 0; z-index: 140; animation: enq-toast-in .35s ease forwards; }
+.enq-toast-row { display: flex; gap: 12px; align-items: flex-start; }
+.enq-toast-ava { width: 40px; height: 40px; flex: none; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.enq-toast-ava img { width: 30px; height: auto; display: block; }
+.enq-toast-text { flex: 1; min-width: 0; }
+.enq-toast-title { display: block; font-size: 15px; font-weight: 800; color: var(--ink); }
+.enq-toast-text p { font-size: 13.5px; line-height: 1.5; color: #4C5553; margin-top: 3px; }
+.enq-toast-text p b { color: var(--emerald-700); }
+.enq-toast-close { background: none; border: none; font-size: 20px; line-height: 1; color: #8fa79a; cursor: pointer; padding: 0 2px; flex: none; }
+.enq-toast-bar { height: 3px; background: var(--gold); border-radius: 99px; margin: 12px 0 0; animation: enq-bar 5s linear forwards; transform-origin: left; }
+@keyframes enq-toast-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes enq-bar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@media (max-width: 600px) {
+  .enq-toast { left: 16px; right: 16px; bottom: 84px; width: auto; }
+}
