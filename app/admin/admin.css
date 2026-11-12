@@ -15,10 +15,6 @@
 .adm-hero h1 { font-size: 32px; margin: 8px 0 4px; color: #fff; }
 .adm-hero h1 em { font-style: italic; color: var(--gold-light); font-weight: 400; }
 .adm-hero p { color: #cfe0d4; font-size: 14.5px; max-width: 640px; margin: 0; }
-.adm-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
-.adm-pill { font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.1); border: 1px solid rgba(201,168,106,0.45); color: var(--gold-light); padding: 6px 12px; border-radius: 999px; }
-.adm-pill.dark { background: var(--gold); color: var(--emerald-950); border-color: var(--gold); }
-
 .adm-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 22px 0 16px; }
 .adm-tab {
   border: 1.5px solid #ddd3ba; background: #fff; color: var(--emerald-800);
@@ -129,9 +125,7 @@
 .adm-step { flex: 1; text-align: center; font-size: 12px; font-weight: 700; color: var(--muted); padding: 8px 4px; border-radius: 999px; background: var(--cream); border: 1px solid #ddd3ba; }
 .adm-step.on { background: var(--emerald-900); color: #fff; border-color: var(--emerald-900); }
 .adm-step.done { background: var(--emerald-100); color: var(--emerald-800); border-color: #bcd8c6; }
-.adm-topbar { display: flex; gap: 10px; justify-content: flex-end; margin-bottom: 16px; flex-wrap: wrap; }
-.adm-foot { text-align: center; color: var(--muted); font-size: 13px; margin-top: 24px; }
-
+.adm-topbar { display: flex; gap: 10px; justify-content: flex-end; margin: 20px 0 16px; flex-wrap: wrap; }
 /* Custom dropdown — 12px radius, 180ms ease open/close, chevron rotates 180deg. No native <select>. */
 .adm-dd { position: relative; width: 100%; }
 .adm-dd-btn {
