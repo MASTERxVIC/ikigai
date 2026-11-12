@@ -9,6 +9,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { getDb } from "../../../../../lib/db.js";
 import { requireAdmin } from "../../../../../lib/auth.js";
+import { logActivity } from "../../../../../lib/activity.js";
 
 export const dynamic = "force-dynamic";
 
@@ -113,6 +114,15 @@ async function upsert(request, params, replace) {
     const set = { ...patch, pinOrder, monogram, updatedAt: new Date() };
     await col.updateOne({ slug }, { $set: set });
   }
+  // Activity feed: one entry per request — pin change first, then visible, then update.
+  const pinChanged = Boolean(merged.pinned) !== Boolean(existing.pinned);
+  const visibleChanged = Boolean(merged.visible ?? true) !== Boolean(existing.visible ?? true);
+  const activityAction = pinChanged
+    ? (merged.pinned ? "pinned" : "unpinned")
+    : visibleChanged
+      ? (merged.visible ? "shown" : "hidden")
+      : "updated";
+  await logActivity(db, { action: activityAction, kind: "project", title: merged.title });
   revalidatePath("/", "layout");
   return json(clean(await col.findOne({ slug })));
 }
@@ -123,8 +133,11 @@ export async function DELETE(request, { params }) {
   const { slug } = await params;
   const db = await getDb();
   if (!db) return json({ error: "Database unavailable" }, 503);
-  const result = await db.collection("projects").deleteOne({ slug });
+  const col = db.collection("projects");
+  const existing = await col.findOne({ slug });
+  const result = await col.deleteOne({ slug });
   if (result.deletedCount === 0) return json({ error: "Project not found" }, 404);
+  await logActivity(db, { action: "deleted", kind: "project", title: existing?.title || slug });
   revalidatePath("/", "layout");
   return json({ ok: true, slug });
 }
