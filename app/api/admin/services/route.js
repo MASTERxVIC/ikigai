@@ -8,6 +8,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { getDb } from "../../../../lib/db.js";
 import { requireAdmin } from "../../../../lib/auth.js";
+import { logActivity } from "../../../../lib/activity.js";
 
 export const dynamic = "force-dynamic";
 
@@ -91,6 +92,7 @@ export async function POST(request) {
   }
   const now = new Date();
   await col.insertOne({ slug, ...value, createdAt: now, updatedAt: now });
+  await logActivity(db, { action: "added", kind: "service", title: value.title });
   revalidatePath("/", "layout");
   return json(clean(await col.findOne({ slug })), 201);
 }
