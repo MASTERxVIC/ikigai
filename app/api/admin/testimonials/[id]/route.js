@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { ObjectId } from "mongodb";
 import { getDb } from "../../../../../lib/db.js";
 import { requireAdmin } from "../../../../../lib/auth.js";
+import { logActivity } from "../../../../../lib/activity.js";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +16,12 @@ function clean(doc) {
   if (!doc) return null;
   const { _id, ...rest } = doc;
   return { id: _id.toString(), ...rest };
+}
+
+// Activity feed title: the quote truncated to 60 chars ("…" only if cut).
+function shortQuote(quote) {
+  const q = String(quote || "");
+  return q.length > 60 ? q.slice(0, 60) + "…" : q;
 }
 
 function toObjectId(id) {
@@ -78,6 +85,7 @@ async function upsert(request, params, replace) {
     if (Object.keys(patch).length === 0) return json(clean(existing));
     await col.updateOne({ _id }, { $set: { ...patch, updatedAt: new Date() } });
   }
+  await logActivity(db, { action: "updated", kind: "testimonial", title: shortQuote(merged.quote) });
   revalidatePath("/", "layout");
   return json(clean(await col.findOne({ _id })));
 }
@@ -90,8 +98,11 @@ export async function DELETE(request, { params }) {
   if (!_id) return json({ error: "Invalid testimonial id" }, 400);
   const db = await getDb();
   if (!db) return json({ error: "Database unavailable" }, 503);
-  const result = await db.collection("testimonials").deleteOne({ _id });
+  const col = db.collection("testimonials");
+  const existing = await col.findOne({ _id });
+  const result = await col.deleteOne({ _id });
   if (result.deletedCount === 0) return json({ error: "Testimonial not found" }, 404);
+  await logActivity(db, { action: "deleted", kind: "testimonial", title: shortQuote(existing?.quote || "") });
   revalidatePath("/", "layout");
   return json({ ok: true, id });
 }
