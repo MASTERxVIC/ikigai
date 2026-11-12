@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { getDb } from "../../../../lib/db.js";
 import { requireAdmin } from "../../../../lib/auth.js";
+import { logActivity } from "../../../../lib/activity.js";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +16,12 @@ function clean(doc) {
   if (!doc) return null;
   const { _id, ...rest } = doc;
   return { id: _id.toString(), ...rest };
+}
+
+// Activity feed title: the quote truncated to 60 chars ("…" only if cut).
+function shortQuote(quote) {
+  const q = String(quote || "");
+  return q.length > 60 ? q.slice(0, 60) + "…" : q;
 }
 
 function validateTestimonial(body) {
@@ -69,6 +76,7 @@ export async function POST(request) {
   }
   const now = new Date();
   const result = await col.insertOne({ ...value, createdAt: now, updatedAt: now });
+  await logActivity(db, { action: "added", kind: "testimonial", title: shortQuote(value.quote) });
   revalidatePath("/", "layout");
   return json(clean(await col.findOne({ _id: result.insertedId })), 201);
 }
