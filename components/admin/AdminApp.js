@@ -555,7 +555,7 @@ export default function AdminApp() {
       </header>
 
       <div className="adm-topbar">
-        <button type="button" className="adm-btn adm-btn-ghost" onClick={() => { setNotice(null); loadAll(); }}>↻ Refresh</button>
+        <a href="/" className="adm-btn adm-btn-ghost">← Back to site</a>
         <button type="button" className="adm-btn adm-btn-dark" onClick={logout}>Log out</button>
       </div>
 
