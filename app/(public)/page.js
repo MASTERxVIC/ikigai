@@ -3,10 +3,9 @@ import SectionHead from "../../components/SectionHead";
 import WhatWeDoArt from "../../components/WhatWeDoArt";
 import Faq from "../../components/Faq";
 import FaqMandala from "../../components/FaqMandala";
-import TestimonialCarousel from "../../components/TestimonialCarousel";
 import JsonLd from "../../components/JsonLd";
 import { IconArrow } from "../../components/icons";
-import WorkCard from "../../components/WorkCard";
+import { LiveHomeServices, LiveHomeWork, LiveHomeTestimonials } from "../../components/LiveSections";
 import { FAQS, STATS } from "../../lib/content";
 import { getServices, getProjects, getTestimonials } from "../../lib/content-db";
 import { orgSchema, faqSchema, SITE_URL } from "../../lib/seo";
@@ -33,11 +32,8 @@ export default async function Home() {
     getProjects(),
     getTestimonials(),
   ]);
-  // Selected Work shows pinned projects only, max 4. The static fallback
-  // has no pinOrder, so when nothing is pinned yet show the first 4 in
-  // order — which is exactly what the page showed before.
-  const pinned = projects.filter((p) => p.pinOrder != null);
-  const homeProjects = (pinned.length > 0 ? pinned : projects).slice(0, 4);
+  // Selected Work pin logic lives in LiveHomeWork (components/LiveSections.js)
+  // — same rule: pinned only, max 4; first 4 in order when nothing is pinned.
 
   const schema = [
     orgSchema,
@@ -96,17 +92,7 @@ export default async function Home() {
             <h2>Eight crafts. One obsession: results.</h2>
             <p>Every engagement hangs in the same hall — pick one craft, or let the studio carry the whole wall.</p>
           </div>
-          <div className="ref-svc-grid">
-            {services.map((s, i) => (
-              <article className="ref-svc" key={s.slug}>
-                <img src="/assets/rope.svg" alt="" aria-hidden="true" className="ref-card-rope" />
-                <h3>{s.title}</h3>
-                <p>{s.short}</p>
-                <div className="ref-ghost" aria-hidden="true">{i + 1}</div>
-                <Link href={`/services#${s.slug}`} className="ref-pill">Learn more</Link>
-              </article>
-            ))}
-          </div>
+          <LiveHomeServices initialServices={services} />
         </div>
       </section>
 
@@ -163,11 +149,7 @@ export default async function Home() {
             <h2>Proof, not promises.</h2>
             <p>Real builds from the studio floor — each one a Daruma that got back up.</p>
           </div>
-          <div className="ref-proj-grid">
-            {homeProjects.map((p) => (
-              <WorkCard key={p.slug} p={p} />
-            ))}
-          </div>
+          <LiveHomeWork initialProjects={projects} />
           <div className="center mt-4">
             <Link href="/work" className="btn btn-dark">View All Work <IconArrow /></Link>
           </div>
@@ -179,7 +161,7 @@ export default async function Home() {
         <img className="bonsai-wm" src="/assets/bonsai-watermark.png" alt="" aria-hidden="true" />
         <div className="container">
           <SectionHead dark eyebrow="Kind words*" title="Clients on the record." lead="*Placeholder testimonials — your words could headline this section next." />
-                      <TestimonialCarousel items={testimonials} />
+                      <LiveHomeTestimonials initialTestimonials={testimonials} />
         </div>
       </section>
 
