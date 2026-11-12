@@ -38,10 +38,10 @@ const PIN_OPTIONS = [
   { value: false, label: "No — Work page only" },
 ];
 
-/** Pushpin icon (Lucide "pin") — professional SVG, no emoji. */
-function PinIcon({ filled }) {
+/** Pushpin icon (Lucide "pin") — outline only, never filled. */
+function PinIcon() {
   return (
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 17v5" />
       <path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1z" />
     </svg>
@@ -78,6 +78,35 @@ async function api(path, opts = {}) {
     throw err;
   }
   return data;
+}
+
+/* ------------------------- activity feed helpers ------------------------- */
+
+function timeAgo(date) {
+  const s = Math.floor((Date.now() - new Date(date).getTime()) / 1000);
+  if (Number.isNaN(s) || s < 60) return "just now";
+  const m = Math.floor(s / 60);
+  if (m < 60) return m === 1 ? "1 min ago" : `${m} min ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return h === 1 ? "1 hr ago" : `${h} hrs ago`;
+  const d = Math.floor(h / 24);
+  if (d === 1) return "Yesterday";
+  if (d < 7) return `${d} days ago`;
+  return new Date(date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
+const ACTIVITY_KIND = { service: "Service", project: "Project", testimonial: "Testimonial" };
+
+function label(a) {
+  const kind = ACTIVITY_KIND[a.kind] || "Item";
+  return `${kind} ${a.action}`;
+}
+
+function displayTitle(a) {
+  if (a.action === "pinned") return `${a.title} to Home Top 4`;
+  if (a.action === "unpinned") return `${a.title} from Home Top 4`;
+  if (a.kind === "testimonial") return `“${a.title}”`;
+  return a.title;
 }
 
 /* ---------------------------------- forms ---------------------------------- */
@@ -354,6 +383,7 @@ export default function AdminApp() {
   const [services, setServices] = useState([]);
   const [projects, setProjects] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [activity, setActivity] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
   const [loggedOut, setLoggedOut] = useState(false);
@@ -405,14 +435,18 @@ export default function AdminApp() {
     setLoading(true);
     setLoadError("");
     try {
-      const [svc, proj, testi] = await Promise.all([
+      const [svc, proj, testi, act] = await Promise.all([
         api("/api/admin/services"),
         api("/api/admin/projects"),
         api("/api/admin/testimonials"),
+        // Activity feed is non-critical: a failure leaves it empty and
+        // must never break the lists above.
+        api("/api/admin/activity").catch(() => []),
       ]);
       setServices(asList(svc, "services"));
       setProjects(asList(proj, "projects"));
       setTestimonials(asList(testi, "testimonials"));
+      setActivity(asList(act, "activity"));
     } catch (err) {
       if (err.status === 401) {
         setLoggedOut(true);
@@ -552,6 +586,19 @@ export default function AdminApp() {
             <div className="adm-stat"><b>{testimonials.length}</b><span>Testimonials</span><i>Client's feedback</i></div>
             <div className="adm-stat"><b>/admin</b><span>Hidden route</span><i>Not visible to the public</i></div>
           </div>
+          <div className="adm-card">
+            <h2>Latest changes</h2>
+            <p className="adm-sub">Every change made from this panel, newest first.</p>
+            <div className="adm-changes">
+              {activity.length ? activity.map((a) => (
+                <div className="adm-change" key={a.id}>
+                  <span className={`dot${a.action === "pinned" || a.action === "unpinned" ? " pin" : a.action === "deleted" ? " del" : ""}`} />
+                  <p><b>{label(a)}</b> — {displayTitle(a)}</p>
+                  <time>{timeAgo(a.at)}</time>
+                </div>
+              )) : <p className="adm-empty">No changes yet — edits from this panel will appear here.</p>}
+            </div>
+          </div>
         </div>
       ) : null}
 
@@ -641,7 +688,7 @@ export default function AdminApp() {
                         title={p.pinned ? "Pinned on Home — click to unpin" : "Pin to Home"}
                         aria-label={p.pinned ? `Unpin ${p.title} from Home` : `Pin ${p.title} to Home`}
                       >
-                        <PinIcon filled={p.pinned} />
+                        <PinIcon />
                       </button>
                       <button type="button" className="adm-btn adm-btn-gold" onClick={() => { setEditingProject(p); showNotice(null); }}>Edit</button>
                       <button
