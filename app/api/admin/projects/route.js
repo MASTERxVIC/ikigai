@@ -13,6 +13,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { getDb } from "../../../../lib/db.js";
 import { requireAdmin } from "../../../../lib/auth.js";
+import { logActivity } from "../../../../lib/activity.js";
 
 export const dynamic = "force-dynamic";
 
@@ -133,6 +134,7 @@ export async function POST(request) {
     createdAt: now,
     updatedAt: now,
   });
+  await logActivity(db, { action: "added", kind: "project", title: value.title });
   revalidatePath("/", "layout");
   return json(clean(await col.findOne({ slug })), 201);
 }
