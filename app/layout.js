@@ -1,10 +1,5 @@
 import "./globals.css";
 import { Montserrat, Nunito, Noto_Serif_JP } from "next/font/google";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import CookieBanner from "../components/CookieBanner";
-import IntroSplash from "../components/IntroSplash";
-import DarumaAssistant from "../components/DarumaAssistant";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -47,17 +42,14 @@ export const metadata = {
   icons: { icon: "/assets/icon.svg" },
 };
 
+// Root layout is deliberately minimal and static: fonts + metadata only.
+// Public chrome (Navbar/Footer/etc.) lives in app/(public)/layout.js and
+// the admin shell in app/admin/layout.js, so /admin never renders the
+// public chrome and public pages keep their static prerendering.
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${nunito.variable} ${notoSerifJP.variable}`}>
-      <body>
-        <IntroSplash />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <CookieBanner />
-        <DarumaAssistant />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
