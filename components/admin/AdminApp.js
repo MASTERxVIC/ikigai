@@ -38,10 +38,10 @@ const PIN_OPTIONS = [
   { value: false, label: "No — Work page only" },
 ];
 
-/** Pushpin icon (Lucide "pin") — outline only, never filled. */
-function PinIcon() {
+/** Pushpin icon (Lucide "pin") — outline when unpinned, filled gold when pinned. */
+function PinIcon({ filled }) {
   return (
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 17v5" />
       <path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1z" />
     </svg>
@@ -688,7 +688,7 @@ export default function AdminApp() {
                         title={p.pinned ? "Pinned on Home — click to unpin" : "Pin to Home"}
                         aria-label={p.pinned ? `Unpin ${p.title} from Home` : `Pin ${p.title} to Home`}
                       >
-                        <PinIcon />
+                        <PinIcon filled={p.pinned} />
                       </button>
                       <button type="button" className="adm-btn adm-btn-gold" onClick={() => { setEditingProject(p); showNotice(null); }}>Edit</button>
                       <button
