@@ -46,21 +46,23 @@
 .adm-stat span { font-size: 13px; color: var(--muted); font-weight: 600; }
 .adm-stat i { display: block; font-style: normal; font-size: 12px; color: var(--gold-dark); font-weight: 700; margin-top: 6px; }
 
+/* Work-style accordion rows in admin (.wk-* base styles come from
+   app/globals.css, same as /work — admin-only additions below). */
+.adm-wk-list { max-width: 960px; margin: 0 auto; }
+.adm-wrap .wk-sum { cursor: default; }
+.wk-sum-main { flex: 1; min-width: 0; background: none; border: 0; cursor: pointer; display: flex; align-items: center; gap: 18px; position: relative; text-align: left; font-family: var(--font); padding: 0; }
+.wk-row-actions { display: flex; gap: 10px; align-items: center; flex: none; position: relative; z-index: 2; }
 .adm-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; padding: 14px 4px; border-bottom: 1px solid #eee6d2; flex-wrap: wrap; }
 .adm-row:last-child { border-bottom: 0; }
-.adm-num { font-weight: 900; font-size: 28px; color: rgba(168, 130, 74, 0.35); width: 44px; flex: none; }
+.adm-info { flex: 1; min-width: 200px; }
+.adm-info b { font-size: 15px; }
+.adm-info p { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
 .adm-mono {
   width: 44px; height: 44px; flex: none; border-radius: 12px;
   background: linear-gradient(135deg, var(--emerald-800), var(--emerald-600));
   color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px;
 }
 .adm-mono.lg { width: 56px; height: 56px; font-size: 26px; border-radius: 14px; }
-.adm-info { flex: 1; min-width: 200px; }
-.adm-info b { font-size: 15px; }
-.adm-info p { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
-.adm-chips { margin-top: 6px; }
-.adm-chip { display: inline-block; font-size: 11px; font-weight: 700; background: var(--cream); border: 1px solid #ddd3ba; border-radius: 999px; padding: 3px 10px; color: var(--emerald-800); margin: 2px 4px 2px 0; }
-.adm-chip.pin { font-size: 13px; padding: 8px 14px; }
 
 .adm-btn { border: none; cursor: pointer; font-family: var(--font); font-weight: 700; font-size: 13px; padding: 9px 16px; border-radius: 999px; transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease; text-decoration: none; display: inline-block; }
 .adm-btn:hover { transform: translateY(-1px); }
@@ -155,6 +157,7 @@
   .adm-stats { grid-template-columns: 1fr 1fr; }
   .adm-form { grid-template-columns: 1fr; }
   .adm-hero h1 { font-size: 26px; }
-  .adm-num { display: none; }
   .adm-codes { grid-template-columns: 1fr; }
+  .wk-row-actions { gap: 6px; }
+  .wk-row-actions .adm-btn { padding: 7px 12px; font-size: 12px; }
 }
