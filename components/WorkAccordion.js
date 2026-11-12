@@ -3,7 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { PROJECTS } from "../lib/content";
 
-export default function WorkAccordion() {
+export default function WorkAccordion({ projects }) {
+  // DB-driven when the Work page passes projects; falls back to the static
+  // copy in lib/content.js when no prop is given (or it is empty).
+  const list = projects && projects.length ? projects : PROJECTS;
   const [open, setOpen] = useState([0]);
   const [swooshRow, setSwooshRow] = useState(null);
   const [swooshTick, setSwooshTick] = useState(0);
@@ -40,7 +43,7 @@ export default function WorkAccordion() {
 
   return (
     <div ref={listRef}>
-      {PROJECTS.map((p, i) => {
+      {list.map((p, i) => {
         const isOpen = open.includes(i);
         const num = String(i + 1).padStart(2, "0");
         const accClass = "wk-acc" + (isOpen ? " open" : "") + ((i + 1) % 2 === 0 ? " wk-even" : "");
