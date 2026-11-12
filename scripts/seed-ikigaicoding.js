@@ -1,6 +1,6 @@
 // Seed script for the ikigaicoding public content collections.
-// Usage: npm run seed  (requires MONGODB_URI in the environment, e.g. via
-// .env.local — see .env.example)
+// Usage: npm run seed  (reads MONGODB_URI from .env.local in the repo root,
+// or from the environment if already set — see .env.example)
 //
 // Seeds the current 8 services, 4 projects and 3 testimonials from
 // lib/content.js into the `ikigaicoding` database. The copy is imported,
@@ -14,6 +14,21 @@
 // `node` without a "type": "module" package, and so the MONGODB_URI check
 // runs before the `mongodb` driver is even loaded.
 "use strict";
+
+// Plain `node` does not read .env.local (only `next dev` does), so load it
+// here with plain fs — no extra dependency. A variable already set in the
+// real environment wins over the file. Lines starting with # are ignored.
+const fs = require("fs");
+const path = require("path");
+const envLocalPath = path.join(__dirname, "..", ".env.local");
+if (fs.existsSync(envLocalPath)) {
+  for (const line of fs.readFileSync(envLocalPath, "utf8").split(/\r?\n/)) {
+    const match = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
+    if (match && !(match[1] in process.env)) {
+      process.env[match[1]] = match[2].trim().replace(/^["']|["']$/g, "");
+    }
+  }
+}
 
 async function main() {
   const uri = process.env.MONGODB_URI;
