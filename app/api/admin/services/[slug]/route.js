@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { getDb } from "../../../../../lib/db.js";
 import { requireAdmin } from "../../../../../lib/auth.js";
+import { logActivity } from "../../../../../lib/activity.js";
 
 export const dynamic = "force-dynamic";
 
@@ -86,6 +87,15 @@ async function upsert(request, params, replace) {
     if (Object.keys(patch).length === 0) return json(clean(existing));
     await col.updateOne({ slug }, { $set: { ...patch, updatedAt: new Date() } });
   }
+  // Log the change for the Dashboard "Latest changes" feed: a visibility
+  // flip logs hidden/shown, anything else logs updated. (The empty-PATCH
+  // early return above performs no write, so nothing is logged for it.)
+  const beforeVisible = existing.visible ?? true;
+  if (patch.visible !== undefined && Boolean(patch.visible) !== Boolean(beforeVisible)) {
+    await logActivity(db, { action: patch.visible ? "shown" : "hidden", kind: "service", title: merged.title });
+  } else {
+    await logActivity(db, { action: "updated", kind: "service", title: merged.title });
+  }
   revalidatePath("/", "layout");
   return json(clean(await col.findOne({ slug })));
 }
@@ -96,8 +106,12 @@ export async function DELETE(request, { params }) {
   const { slug } = await params;
   const db = await getDb();
   if (!db) return json({ error: "Database unavailable" }, 503);
-  const result = await db.collection("services").deleteOne({ slug });
+  const col = db.collection("services");
+  const existing = await col.findOne({ slug });
+  if (!existing) return json({ error: "Service not found" }, 404);
+  const result = await col.deleteOne({ slug });
   if (result.deletedCount === 0) return json({ error: "Service not found" }, 404);
+  await logActivity(db, { action: "deleted", kind: "service", title: existing.title });
   revalidatePath("/", "layout");
   return json({ ok: true, slug });
 }
