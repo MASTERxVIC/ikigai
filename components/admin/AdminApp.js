@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Dropdown from "./Dropdown";
 import LoginForm from "./LoginForm";
 
@@ -357,6 +357,15 @@ export default function AdminApp() {
   const [editingProject, setEditingProject] = useState(null);
   const [editingTesti, setEditingTesti] = useState(null);
 
+  // Edit scrolls the form into view on all three tabs, so clicking Edit
+  // always shows the form instead of leaving the user at the list.
+  const formRef = useRef(null);
+  useEffect(() => {
+    if ((editingService || editingProject || editingTesti) && formRef.current) {
+      formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [editingService, editingProject, editingTesti]);
+
   const pinnedCount = useMemo(() => projects.filter((p) => p.pinned).length, [projects]);
   const pinnedProjects = useMemo(() => projects.filter((p) => p.pinned), [projects]);
 
@@ -385,7 +394,14 @@ export default function AdminApp() {
 
   useEffect(() => { loadAll(); }, [loadAll]);
 
+  // showNotice(null) clears the notice. (Previously it set notice to
+  // { type: null, text: undefined } — a truthy object that rendered an
+  // empty pink bar with only a Dismiss button.)
   function showNotice(type, text) {
+    if (type == null) {
+      setNotice(null);
+      return;
+    }
     setNotice({ type, text });
   }
   function handleSaved(text) {
@@ -458,7 +474,6 @@ export default function AdminApp() {
       <header className="adm-hero">
         <div className="adm-eyebrow">ikigaicoding • Daruma Hall • Staff only</div>
         <h1>Admin Panel <em>— manage content</em></h1>
-        <p>Manage Services, Projects and Testimonials. New items appear on the site automatically — no code changes needed.</p>
       </header>
 
       <div className="adm-topbar">
@@ -500,16 +515,6 @@ export default function AdminApp() {
             </div>
             <div className="adm-note"><b>Rule:</b> Maximum <b>4 pins</b>. To pin another project, unpin one first.</div>
           </div>
-          <div className="adm-card">
-            <h2>How it works</h2>
-            <p className="adm-sub" style={{ marginTop: 8 }}>
-              1 &nbsp; <b>Add a service</b> → its card is created automatically and appears on Home and the Services page.<br />
-              2 &nbsp; <b>Add a project</b> → it appears on the Work page. Pin it to show it in the Home Top 4.<br />
-              3 &nbsp; <b>Add a testimonial</b> → it appears in the Home carousel.<br />
-              4 &nbsp; <b>Hide an item</b> → it is hidden from the public, not deleted. You can show it again.
-            </p>
-            <div className="adm-note">Design, fonts, colours and spacing stay unchanged. Only the content comes from the database, so responsiveness is unaffected.</div>
-          </div>
         </div>
       ) : null}
 
@@ -517,7 +522,6 @@ export default function AdminApp() {
         <div className="adm-panel" key="svc">
           <div className="adm-card">
             <h2>Services — {services.length}, locked order</h2>
-            <p className="adm-sub">A new service is added at the end of the list. The card design stays the same — ghost number, gold border on hover.</p>
             <div style={{ marginTop: 8 }}>
               {services.length === 0 && !loading ? <p className="adm-sub">No services yet — add one below.</p> : null}
               {services.map((s, i) => (
@@ -539,7 +543,7 @@ export default function AdminApp() {
               ))}
             </div>
           </div>
-          <div className="adm-card">
+          <div className="adm-card" ref={formRef}>
             <h2>{editingService ? "Edit service" : "+ Add a service"}</h2>
             <p className="adm-sub">These fields appear on the public card. <b>Short</b> appears on the card; <b>Description + Points</b> on the service detail.</p>
             <ServiceForm
@@ -559,10 +563,6 @@ export default function AdminApp() {
         <div className="adm-panel" key="proj">
           <div className="adm-card">
             <h2>Projects — pin Top 4 for Home</h2>
-            <p className="adm-sub">Only the 4 pinned projects appear on Home. The rest appear on the Work page, latest first.</p>
-            <div className="adm-note" style={{ marginTop: 10 }}>
-              <b>No image field — by design.</b> Projects have no photo on the site; the card shows a monogram letter instead, generated from the first letter of the title.
-            </div>
             <div style={{ marginTop: 8 }}>
               {projects.length === 0 && !loading ? <p className="adm-sub">No projects yet — add one below.</p> : null}
               {projects.map((p) => (
@@ -594,7 +594,7 @@ export default function AdminApp() {
               ))}
             </div>
           </div>
-          <div className="adm-card">
+          <div className="adm-card" ref={formRef}>
             <h2>{editingProject ? "Edit project" : "+ Add a project"}</h2>
             <ProjectForm
               key={editingProject ? `edit-${editingProject.slug}` : "add"}
@@ -612,7 +612,6 @@ export default function AdminApp() {
         <div className="adm-panel" key="testi">
           <div className="adm-card">
             <h2>Testimonials</h2>
-            <p className="adm-sub">3 placeholders. Replace them with real client words as they come in — add the new one, then hide the old one.</p>
             <div style={{ marginTop: 8 }}>
               {testimonials.length === 0 && !loading ? <p className="adm-sub">No testimonials yet — add one below.</p> : null}
               {testimonials.map((t, i) => (
@@ -633,7 +632,7 @@ export default function AdminApp() {
               ))}
             </div>
           </div>
-          <div className="adm-card">
+          <div className="adm-card" ref={formRef}>
             <h2>{editingTesti ? "Edit testimonial" : "+ Add a testimonial"}</h2>
             <TestimonialForm
               key={editingTesti ? `edit-${editingTesti.id || editingTesti._id}` : "add"}
