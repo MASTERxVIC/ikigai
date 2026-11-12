@@ -436,6 +436,17 @@ export default function AdminApp() {
     }
     setNotice({ type, text });
   }
+
+  // Toast auto-dismisses after 5 seconds — no Dismiss button needed.
+  useEffect(() => {
+    if (!notice && !loadError) return;
+    const t = setTimeout(() => {
+      setNotice(null);
+      setLoadError("");
+    }, 5000);
+    return () => clearTimeout(t);
+  }, [notice, loadError]);
+
   function handleSaved(text) {
     showNotice("ok", text);
     setEditingService(null);
@@ -520,13 +531,16 @@ export default function AdminApp() {
         <button type="button" className={`adm-tab${tab === "testi" ? " on" : ""}`} onClick={() => setTab("testi")}>Testimonials <small>• {testimonials.length}</small></button>
       </div>
 
-      {notice ? (
-        <div className={`adm-msg ${notice.type === "ok" ? "ok" : "err"}`} role={notice.type === "ok" ? "status" : "alert"}>
-          {notice.text}
-          <button type="button" className="adm-linklike" style={{ float: "right" }} onClick={() => setNotice(null)}>Dismiss</button>
+      {(notice || loadError) ? (
+        <div className="adm-toasts" aria-live="polite">
+          {notice ? (
+            <div className={`adm-msg ${notice.type === "ok" ? "ok" : "err"}`} role={notice.type === "ok" ? "status" : "alert"}>
+              {notice.text}
+            </div>
+          ) : null}
+          {loadError ? <div className="adm-msg err" role="alert">{loadError}</div> : null}
         </div>
       ) : null}
-      {loadError ? <div className="adm-msg err" role="alert">{loadError}</div> : null}
       {loading ? <p className="adm-sub">Loading…</p> : null}
 
       {tab === "dash" ? (
