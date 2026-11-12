@@ -97,6 +97,9 @@
 .adm-note { font-size: 13px; color: var(--gold-dark); background: rgba(201, 168, 106, 0.12); border: 1px dashed rgba(201, 168, 106, 0.5); border-radius: 10px; padding: 11px 14px; margin-top: 14px; }
 .adm-note b { color: var(--emerald-800); }
 .adm-msg { font-size: 13.5px; font-weight: 600; border-radius: 10px; padding: 11px 14px; margin-top: 14px; }
+/* Toasts: every notice (success or error) appears bottom-right, not as a bar. */
+.adm-toasts { position: fixed; right: 20px; bottom: 20px; z-index: 100; display: flex; flex-direction: column; gap: 10px; max-width: min(420px, calc(100vw - 40px)); }
+.adm-toasts .adm-msg { margin: 0; box-shadow: 0 12px 32px rgba(10, 31, 22, 0.18); }
 .adm-msg.err { color: #8c2f22; background: #fbeae6; border: 1px solid #eec5bd; }
 .adm-msg.ok { color: var(--emerald-800); background: var(--emerald-100); border: 1px solid #bcd8c6; }
 .adm-msg.info { color: var(--emerald-800); background: var(--cream); border: 1px solid #ddd3ba; }
