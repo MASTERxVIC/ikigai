@@ -103,7 +103,7 @@ export default function LoginForm() {
         <div className="adm-eyebrow">ikigaicoding • Staff only</div>
         <h2 style={{ marginTop: 8 }}>Welcome back</h2>
         <p className="adm-sub">
-          Same login as the Blog — the 6-digit code from your authenticator app. No email + password here.
+          Sign in with the 6-digit code from your authenticator app. No email or password is used here.
         </p>
         <form onSubmit={submit}>
           {backupMode ? (

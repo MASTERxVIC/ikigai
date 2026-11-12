@@ -23,8 +23,8 @@ const SHOW_ON_OPTIONS = [
   { value: "services", label: "Services page only" },
 ];
 const VISIBLE_OPTIONS = [
-  { value: true, label: "Yes — public ko dikhe" },
-  { value: false, label: "No — sirf draft, chhupa rahe" },
+  { value: true, label: "Yes — visible to the public" },
+  { value: false, label: "No — hidden draft" },
 ];
 const CATEGORY_OPTIONS = [
   { value: "Full-Stack Platform", label: "Full-Stack Platform" },
@@ -34,8 +34,8 @@ const CATEGORY_OPTIONS = [
   { value: "Website", label: "Website" },
 ];
 const PIN_OPTIONS = [
-  { value: true, label: "Yes — pin karo" },
-  { value: false, label: "No — sirf Work page pe" },
+  { value: true, label: "Yes — pin to Home" },
+  { value: false, label: "No — Work page only" },
 ];
 
 function slugify(text) {
@@ -91,7 +91,7 @@ function ServiceForm({ initial, index, total, onSaved, onCancel, onError }) {
   async function submit(e) {
     e.preventDefault();
     if (!title.trim() || !short.trim()) {
-      onError("Title aur Short dono zaroori hain.");
+      onError("Title and Short are both required.");
       return;
     }
     setBusy(true);
@@ -111,7 +111,7 @@ function ServiceForm({ initial, index, total, onSaved, onCancel, onError }) {
         payload.slug = slugify(title);
         await api("/api/admin/services", { method: "POST", body: JSON.stringify(payload) });
       }
-      onSaved(editing ? "Service updated." : "Service saved — card apne aap ban gaya.");
+      onSaved(editing ? "Service updated." : "Service saved — card created automatically.");
     } catch (err) {
       onError(err.message);
     } finally {
@@ -129,22 +129,22 @@ function ServiceForm({ initial, index, total, onSaved, onCancel, onError }) {
       </div>
       <Dropdown label="Icon" options={ICON_OPTIONS} value={icon} onChange={setIcon} />
       <div className="adm-field full">
-        <label>Short — card pe dikhega *</label>
-        <input value={short} onChange={(e) => setShort(e.target.value)} placeholder="One line, card pe dikhega" required />
+        <label>Short — shown on the card *</label>
+        <input value={short} onChange={(e) => setShort(e.target.value)} placeholder="One line, shown on the card" required />
       </div>
       <div className="adm-field full">
-        <label>Description — detail page pe</label>
-        <textarea rows={3} value={desc} onChange={(e) => setDesc(e.target.value)} placeholder="2–3 lines me kya milega" />
+        <label>Description — service detail page</label>
+        <textarea rows={3} value={desc} onChange={(e) => setDesc(e.target.value)} placeholder="What this service includes, in 2–3 lines" />
       </div>
       <div className="adm-field full">
-        <label>Points — ek line me ek point</label>
+        <label>Points — one point per line</label>
         <textarea rows={3} value={points} onChange={(e) => setPoints(e.target.value)} placeholder={"Point 1\nPoint 2\nPoint 3"} />
       </div>
       <Dropdown label="Show on" options={SHOW_ON_OPTIONS} value={showOn} onChange={setShowOn} />
       <Dropdown label="Visible?" options={VISIBLE_OPTIONS} value={visible} onChange={setVisible} />
       <div className="adm-field full" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
         <button type="submit" className="adm-btn adm-btn-gold" disabled={busy} style={{ padding: 13 }}>
-          {busy ? "Saving…" : editing ? "Update service →" : "Save service → card apne aap ban jayega"}
+          {busy ? "Saving…" : editing ? "Update service →" : "Save service →"}
         </button>
         {editing ? (
           <button type="button" className="adm-btn adm-btn-ghost" onClick={onCancel}>Cancel edit</button>
@@ -152,12 +152,12 @@ function ServiceForm({ initial, index, total, onSaved, onCancel, onError }) {
       </div>
       {title.trim() || short.trim() ? (
         <div className="adm-preview" style={{ gridColumn: "1 / -1" }}>
-          <h4>Live preview — aisa card banega</h4>
+          <h4>Live preview</h4>
           <div className="adm-svc-preview">
             <span className="adm-ghost">{ghostNo}</span>
             <h3>{title.trim() || "Service title"}</h3>
-            <p>{short.trim() || "Short line yahan dikhegi."}</p>
-            <p style={{ marginTop: 14, fontWeight: 700, color: "var(--emerald-700)" }}>✓ Points wahi dikhenge jo upar likhe</p>
+            <p>{short.trim() || "Short line appears here."}</p>
+            <p style={{ marginTop: 14, fontWeight: 700, color: "var(--emerald-700)" }}>✓ Points appear as written above</p>
           </div>
         </div>
       ) : null}
@@ -181,12 +181,12 @@ function ProjectForm({ initial, onSaved, onCancel, onError, pinnedCount }) {
   async function submit(e) {
     e.preventDefault();
     if (!title.trim() || !subtitle.trim() || !desc.trim()) {
-      onError("Title, Subtitle aur Short desc zaroori hain.");
+      onError("Title, Subtitle and Short description are required.");
       return;
     }
     // Client-side pin guard: the server also enforces max 4 (400 on the 5th).
     if (pinned && !initial?.pinned && pinnedCount >= MAX_PINS) {
-      onError(PIN_FULL_MSG + " Ye project pin ke bina save hoga — pehle kisi ka pin hatao.");
+      onError(PIN_FULL_MSG + " This project will be saved without a pin — unpin one first.");
       return;
     }
     setBusy(true);
@@ -208,7 +208,7 @@ function ProjectForm({ initial, onSaved, onCancel, onError, pinnedCount }) {
         payload.slug = slugify(title);
         await api("/api/admin/projects", { method: "POST", body: JSON.stringify(payload) });
       }
-      onSaved(editing ? "Project updated." : "Project saved — Work page pe aa jayega.");
+      onSaved(editing ? "Project updated." : "Project saved — it will appear on the Work page.");
     } catch (err) {
       onError(err.message);
     } finally {
@@ -226,7 +226,7 @@ function ProjectForm({ initial, onSaved, onCancel, onError, pinnedCount }) {
         <label>Monogram — auto</label>
         <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
           <span className="adm-mono">{(title || "?").charAt(0).toUpperCase()}</span>
-          <span className="adm-sub">Title ke pehle letter se banega</span>
+          <span className="adm-sub">Generated from the first letter of the title</span>
         </div>
       </div>
       <div className="adm-field">
@@ -235,15 +235,15 @@ function ProjectForm({ initial, onSaved, onCancel, onError, pinnedCount }) {
       </div>
       <Dropdown label="Category" options={CATEGORY_OPTIONS} value={category} onChange={setCategory} />
       <div className="adm-field full">
-        <label>Short desc — card pe *</label>
-        <textarea rows={2} value={desc} onChange={(e) => setDesc(e.target.value)} placeholder="Ek-do line me kya banaya" required />
+        <label>Short description — shown on the card *</label>
+        <textarea rows={2} value={desc} onChange={(e) => setDesc(e.target.value)} placeholder="What was built, in one or two lines" required />
       </div>
       <div className="adm-field full">
-        <label>Built / Case study — Work page pe</label>
-        <textarea rows={3} value={built} onChange={(e) => setBuilt(e.target.value)} placeholder="Kaise banaya, kya-kya andar hai" />
+        <label>Built / Case study — Work page</label>
+        <textarea rows={3} value={built} onChange={(e) => setBuilt(e.target.value)} placeholder="How it was built and what it includes" />
       </div>
       <div className="adm-field">
-        <label>Tech chips — comma se alag</label>
+        <label>Tech chips — separated by commas</label>
         <input value={chips} onChange={(e) => setChips(e.target.value)} placeholder="React, Node.js, MongoDB" />
       </div>
       <div className="adm-field">
@@ -254,7 +254,7 @@ function ProjectForm({ initial, onSaved, onCancel, onError, pinnedCount }) {
       <Dropdown label="Visible?" options={VISIBLE_OPTIONS} value={visible} onChange={setVisible} />
       <div className="adm-field full" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
         <button type="submit" className="adm-btn adm-btn-gold" disabled={busy} style={{ padding: 13 }}>
-          {busy ? "Saving…" : editing ? "Update project →" : "Save project → Work page pe aa jayega"}
+          {busy ? "Saving…" : editing ? "Update project →" : "Save project →"}
         </button>
         {editing ? (
           <button type="button" className="adm-btn adm-btn-ghost" onClick={onCancel}>Cancel edit</button>
@@ -276,7 +276,7 @@ function TestimonialForm({ initial, onSaved, onCancel, onError, minOrder, maxOrd
   async function submit(e) {
     e.preventDefault();
     if (!quote.trim() || !name.trim() || !role.trim()) {
-      onError("Quote, Name aur Role zaroori hain.");
+      onError("Quote, Name and Role are required.");
       return;
     }
     setBusy(true);
@@ -296,7 +296,7 @@ function TestimonialForm({ initial, onSaved, onCancel, onError, minOrder, maxOrd
         payload.order = position === "top" ? (minOrder ?? 0) - 1 : (maxOrder ?? -1) + 1;
         await api("/api/admin/testimonials", { method: "POST", body: JSON.stringify(payload) });
       }
-      onSaved(editing ? "Testimonial updated." : "Testimonial saved — Home carousel me aa jayega.");
+      onSaved(editing ? "Testimonial updated." : "Testimonial saved — it will appear in the Home carousel.");
     } catch (err) {
       onError(err.message);
     } finally {
@@ -308,7 +308,7 @@ function TestimonialForm({ initial, onSaved, onCancel, onError, minOrder, maxOrd
     <form className="adm-form" onSubmit={submit}>
       <div className="adm-field full">
         <label>Quote *</label>
-        <textarea rows={3} value={quote} onChange={(e) => setQuote(e.target.value)} placeholder="Client ne kya kaha — exact words" required />
+        <textarea rows={3} value={quote} onChange={(e) => setQuote(e.target.value)} placeholder="What the client said — exact words" required />
       </div>
       <div className="adm-field">
         <label>Name *</label>
@@ -323,8 +323,8 @@ function TestimonialForm({ initial, onSaved, onCancel, onError, minOrder, maxOrd
         <Dropdown
           label="Order"
           options={[
-            { value: "end", label: "End me add karo" },
-            { value: "top", label: "Upar — pehle dikhao" },
+            { value: "end", label: "Add at the end" },
+            { value: "top", label: "Add at the top — show first" },
           ]}
           value={position}
           onChange={setPosition}
@@ -332,7 +332,7 @@ function TestimonialForm({ initial, onSaved, onCancel, onError, minOrder, maxOrd
       ) : null}
       <div className="adm-field full" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
         <button type="submit" className="adm-btn adm-btn-gold" disabled={busy} style={{ padding: 13 }}>
-          {busy ? "Saving…" : editing ? "Update testimonial →" : "Save testimonial → Home carousel me aa jayega"}
+          {busy ? "Saving…" : editing ? "Update testimonial →" : "Save testimonial →"}
         </button>
         {editing ? (
           <button type="button" className="adm-btn adm-btn-ghost" onClick={onCancel}>Cancel edit</button>
@@ -406,7 +406,7 @@ export default function AdminApp() {
       // projects have NO `visible` field server-side — the PUT silently
       // drops it. Say so instead of pretending the toggle worked.
       if (kind === "projects" && saved.visible !== next) {
-        showNotice("err", "Projects have no visible flag on the server yet — this toggle had no effect. Hide a project by unpinning it (it stays on the Work page) or ask Worker A to add a visible field.");
+        showNotice("err", "Projects have no visible flag yet — this toggle had no effect. To remove a project from Home, unpin it; it stays on the Work page.");
       }
       loadAll();
     } catch (err) {
@@ -458,14 +458,7 @@ export default function AdminApp() {
       <header className="adm-hero">
         <div className="adm-eyebrow">ikigaicoding • Daruma Hall • Staff only</div>
         <h1>Admin Panel <em>— manage content</em></h1>
-        <p>Services, Projects aur Testimonials — bina code chhede, bina responsiveness bigaade. Naya item add karo, card apne aap banega aur jahan zaroorat hai wahan dikhega.</p>
-        <div className="adm-pills">
-          <span className="adm-pill dark">/admin — direct URL only</span>
-          <span className="adm-pill">No navbar link</span>
-          <span className="adm-pill">noindex • nofollow</span>
-          <span className="adm-pill">Owner only</span>
-          <span className="adm-pill">No project image — monogram only</span>
-        </div>
+        <p>Manage Services, Projects and Testimonials. New items appear on the site automatically — no code changes needed.</p>
       </header>
 
       <div className="adm-topbar">
@@ -494,28 +487,28 @@ export default function AdminApp() {
           <div className="adm-stats">
             <div className="adm-stat"><b>{services.length}</b><span>Services live</span><i>Locked order • 1–{services.length || "–"}</i></div>
             <div className="adm-stat"><b>{projects.length}</b><span>Projects</span><i>{pinnedCount} pinned on Home</i></div>
-            <div className="adm-stat"><b>{testimonials.length}</b><span>Testimonials</span><i>Placeholder — real wale aane hain</i></div>
-            <div className="adm-stat"><b>/admin</b><span>Hidden route</span><i>Public ko nahi dikhta</i></div>
+            <div className="adm-stat"><b>{testimonials.length}</b><span>Testimonials</span><i>Placeholders — awaiting real client feedback</i></div>
+            <div className="adm-stat"><b>/admin</b><span>Hidden route</span><i>Not visible to the public</i></div>
           </div>
           <div className="adm-card">
-            <h2>Home pe kya dikhega — Top 4 pinned projects</h2>
-            <p className="adm-sub">Admin jis project ko pin karega, wahi Home ke “Selected work” me aayega. Baaki sab Work page pe latest order me.</p>
+            <h2>Home — Top 4 pinned projects</h2>
+            <p className="adm-sub">Pinned projects appear in “Selected work” on Home. Everything else appears on the Work page, latest first.</p>
             <div style={{ marginTop: 12 }}>
               {pinnedProjects.length
                 ? pinnedProjects.map((p) => <span key={p.slug} className="adm-chip pin">📌 {p.title}</span>)
-                : <p className="adm-sub">Koi pin nahi — Home pe Selected work khaali dikhega.</p>}
+                : <p className="adm-sub">No projects pinned — “Selected work” on Home will be empty.</p>}
             </div>
-            <div className="adm-note"><b>Rule:</b> Zyada se zyada <b>4 pin</b> ho sakte hain. 5th ko pin karoge to error milega — pehle kisi ek ka pin hatao.</div>
+            <div className="adm-note"><b>Rule:</b> Maximum <b>4 pins</b>. To pin another project, unpin one first.</div>
           </div>
           <div className="adm-card">
-            <h2>Kaise kaam karega?</h2>
+            <h2>How it works</h2>
             <p className="adm-sub" style={{ marginTop: 8 }}>
-              1 &nbsp; <b>Service add karo</b> → card apne aap banega, Home + Services page pe dikhega.<br />
-              2 &nbsp; <b>Project add karo</b> → Work page pe aa jayega. Pin karo to Home Top 4 me aa jayega.<br />
-              3 &nbsp; <b>Testimonial add karo</b> → Home carousel me aa jayega.<br />
-              4 &nbsp; <b>Hide karo</b> → delete nahi, sirf public se chhup jayega. Wapas show kar sakte ho.
+              1 &nbsp; <b>Add a service</b> → its card is created automatically and appears on Home and the Services page.<br />
+              2 &nbsp; <b>Add a project</b> → it appears on the Work page. Pin it to show it in the Home Top 4.<br />
+              3 &nbsp; <b>Add a testimonial</b> → it appears in the Home carousel.<br />
+              4 &nbsp; <b>Hide an item</b> → it is hidden from the public, not deleted. You can show it again.
             </p>
-            <div className="adm-note">Design, font, colour, spacing — kuch nahi badlega. Sirf content DB se aayega, isiliye responsiveness nahi bigdegi.</div>
+            <div className="adm-note">Design, fonts, colours and spacing stay unchanged. Only the content comes from the database, so responsiveness is unaffected.</div>
           </div>
         </div>
       ) : null}
@@ -524,7 +517,7 @@ export default function AdminApp() {
         <div className="adm-panel" key="svc">
           <div className="adm-card">
             <h2>Services — {services.length}, locked order</h2>
-            <p className="adm-sub">Order upar-neeche karke badal sakte ho. Nayi service add karoge to woh list ke end me aayegi, phir order set kar dena. Card ka design wahi rahega — ghost number, gold border on hover.</p>
+            <p className="adm-sub">A new service is added at the end of the list. The card design stays the same — ghost number, gold border on hover.</p>
             <div style={{ marginTop: 8 }}>
               {services.length === 0 && !loading ? <p className="adm-sub">No services yet — add one below.</p> : null}
               {services.map((s, i) => (
@@ -548,7 +541,7 @@ export default function AdminApp() {
           </div>
           <div className="adm-card">
             <h2>{editingService ? "Edit service" : "+ Add a service"}</h2>
-            <p className="adm-sub">Yehi fields public card pe dikhenge. <b>Short</b> card pe, <b>Description + Points</b> Services detail pe.</p>
+            <p className="adm-sub">These fields appear on the public card. <b>Short</b> appears on the card; <b>Description + Points</b> on the service detail.</p>
             <ServiceForm
               key={editingService ? `edit-${editingService.slug}` : "add"}
               initial={editingService}
@@ -566,9 +559,9 @@ export default function AdminApp() {
         <div className="adm-panel" key="proj">
           <div className="adm-card">
             <h2>Projects — pin Top 4 for Home</h2>
-            <p className="adm-sub">Home pe sirf pinned 4 dikhte hain. Baaki Work page pe latest order me. Pin dabao — count upar Dashboard pe bhi badlega.</p>
+            <p className="adm-sub">Only the 4 pinned projects appear on Home. The rest appear on the Work page, latest first.</p>
             <div className="adm-note" style={{ marginTop: 10 }}>
-              <b>No image field — jaan-bujh ke nahi hai.</b> Site me project ki photo hoti hi nahi; card pe monogram letter (W / C / S / E) dikhta hai. Naye project ka monogram title ke pehle letter se apne aap banega.
+              <b>No image field — by design.</b> Projects have no photo on the site; the card shows a monogram letter instead, generated from the first letter of the title.
             </div>
             <div style={{ marginTop: 8 }}>
               {projects.length === 0 && !loading ? <p className="adm-sub">No projects yet — add one below.</p> : null}
@@ -619,7 +612,7 @@ export default function AdminApp() {
         <div className="adm-panel" key="testi">
           <div className="adm-card">
             <h2>Testimonials</h2>
-            <p className="adm-sub">Abhi 3 placeholder hain. Real client words aate hi inhe replace kar dena — add karo, purane ko hide karo.</p>
+            <p className="adm-sub">3 placeholders. Replace them with real client words as they come in — add the new one, then hide the old one.</p>
             <div style={{ marginTop: 8 }}>
               {testimonials.length === 0 && !loading ? <p className="adm-sub">No testimonials yet — add one below.</p> : null}
               {testimonials.map((t, i) => (
@@ -655,7 +648,6 @@ export default function AdminApp() {
         </div>
       ) : null}
 
-      <p className="adm-foot">Daruma Hall theme (emerald #0b2e21 • gold #c9a86a • cream #f7f2e5) • Mobile pe sab stack ho jayega, koi fixed width nahi.</p>
     </div>
   );
 }
