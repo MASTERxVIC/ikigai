@@ -515,8 +515,9 @@ export default function AdminApp() {
   return (
     <div className="adm-wrap">
       <header className="adm-hero">
-        <div className="adm-eyebrow">ikigaicoding • Daruma Hall • Staff only</div>
-        <h1>Admin Panel <em>— manage content</em></h1>
+        <div className="adm-eyebrow">ikigaicoding • Admin only</div>
+        <h1>Admin Panel</h1>
+        <p className="adm-hero-sub">manage content</p>
       </header>
 
       <div className="adm-topbar">
