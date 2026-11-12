@@ -1,11 +1,10 @@
-import Link from "next/link";
 import SectionHead from "../../../components/SectionHead";
 import PageHero from "../../../components/PageHero";
 import Faq from "../../../components/Faq";
 import FaqMandala from "../../../components/FaqMandala";
 import JsonLd from "../../../components/JsonLd";
 import HashScroll from "../../../components/HashScroll";
-import { SERVICE_ICONS } from "../../../components/icons";
+import { LiveServicesGrid } from "../../../components/LiveSections";
 import { FAQS } from "../../../lib/content";
 import { getServices } from "../../../lib/content-db";
 import { faqSchema } from "../../../lib/seo";
@@ -60,37 +59,7 @@ export default async function Services() {
 
       <section className="section">
         <div className="container">
-          <div className="grid grid-2">
-            {services.map((s, i) => {
-              const Icon = SERVICE_ICONS[s.icon];
-              const num = `${i + 1}`;
-              return (
-                <article className="svc-card glass-card" id={s.slug} key={s.slug} style={{ scrollMarginTop: 100 }}>
-                  <span className="svc-ghost" aria-hidden="true">{num}</span>
-                  <div className="svc-eyebrow"><span className="svc-ico"><Icon /></span> {s.title}</div>
-                  <p style={{ fontSize: 15.5 }}>{s.desc}</p>
-                  <ul className="svc-points">
-                    {s.points.map((pt) => <li key={pt}>{pt}</li>)}
-                  </ul>
-                  {s.note ? (
-                    <p className="svc-note">
-                      {s.note.text} <Link href={`/services#${s.note.linkSlug}`}>{s.note.linkLabel}</Link>.
-                    </p>
-                  ) : null}
-                  <div className="mt-2">
-                    <Link href="/contact" className="svc-pill">
-                      {"Start a project →".split("").map((ch, i) => (
-                        <span key={i} className="ch" style={{ "--d": `${i * 15}ms` }}>
-                          <span>{ch === " " ? "\u00A0" : ch}</span>
-                          <span aria-hidden="true">{ch === " " ? "\u00A0" : ch}</span>
-                        </span>
-                      ))}
-                    </Link>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+          <LiveServicesGrid initialServices={services} />
           <div className="placeholder-note">Service descriptions are launch-ready drafts — Atul will refine with real offers and pricing later.</div>
         </div>
       </section>
