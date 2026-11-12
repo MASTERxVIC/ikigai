@@ -5,11 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "seed": "node scripts/seed-ikigaicoding.js"
   },
   "dependencies": {
     "next": "16.4.2",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "mongodb": "^6.20.0"
   }
 }
