@@ -70,11 +70,6 @@ async function api(path, opts = {}) {
   return data;
 }
 
-function monogramOf(item) {
-  if (item.monogram) return item.monogram;
-  return (item.title || "?").charAt(0).toUpperCase();
-}
-
 /* ---------------------------------- forms ---------------------------------- */
 
 function ServiceForm({ initial, index, total, onSaved, onCancel, onError }) {
@@ -366,8 +361,35 @@ export default function AdminApp() {
     }
   }, [editingService, editingProject, editingTesti]);
 
+  // Work-style accordion state (mirrors /work: first row open, several can open).
+  const [openSvc, setOpenSvc] = useState([0]);
+  const [openProj, setOpenProj] = useState([0]);
+
+  // Title swoosh on row click — same classes as components/WorkAccordion.js.
+  function swooshRowEl(acc) {
+    if (!acc) return;
+    const title = acc.querySelector(".wk-title");
+    if (title) {
+      title.classList.remove("swoosh");
+      void title.getBoundingClientRect();
+      title.classList.add("swoosh");
+      title.addEventListener("animationend", () => title.classList.remove("swoosh"), { once: true });
+    }
+    const clones = acc.querySelectorAll(".wk-clone");
+    if (clones.length) {
+      acc.classList.remove("swooshing");
+      void acc.getBoundingClientRect();
+      acc.classList.add("swooshing");
+      const last = clones[clones.length - 1];
+      last.addEventListener("animationend", () => acc.classList.remove("swooshing"), { once: true });
+    }
+  }
+  function toggleAcc(setOpen, i, e) {
+    setOpen((prev) => (prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]));
+    swooshRowEl(e.currentTarget.closest(".wk-acc"));
+  }
+
   const pinnedCount = useMemo(() => projects.filter((p) => p.pinned).length, [projects]);
-  const pinnedProjects = useMemo(() => projects.filter((p) => p.pinned), [projects]);
 
   const loadAll = useCallback(async () => {
     setLoading(true);
@@ -502,46 +524,54 @@ export default function AdminApp() {
           <div className="adm-stats">
             <div className="adm-stat"><b>{services.length}</b><span>Services live</span><i>Locked order • 1–{services.length || "–"}</i></div>
             <div className="adm-stat"><b>{projects.length}</b><span>Projects</span><i>{pinnedCount} pinned on Home</i></div>
-            <div className="adm-stat"><b>{testimonials.length}</b><span>Testimonials</span><i>Placeholders — awaiting real client feedback</i></div>
+            <div className="adm-stat"><b>{testimonials.length}</b><span>Testimonials</span><i>Client's feedback</i></div>
             <div className="adm-stat"><b>/admin</b><span>Hidden route</span><i>Not visible to the public</i></div>
-          </div>
-          <div className="adm-card">
-            <h2>Home — Top 4 pinned projects</h2>
-            <p className="adm-sub">Pinned projects appear in “Selected work” on Home. Everything else appears on the Work page, latest first.</p>
-            <div style={{ marginTop: 12 }}>
-              {pinnedProjects.length
-                ? pinnedProjects.map((p) => <span key={p.slug} className="adm-chip pin">📌 {p.title}</span>)
-                : <p className="adm-sub">No projects pinned — “Selected work” on Home will be empty.</p>}
-            </div>
-            <div className="adm-note"><b>Rule:</b> Maximum <b>4 pins</b>. To pin another project, unpin one first.</div>
           </div>
         </div>
       ) : null}
 
       {tab === "svc" ? (
         <div className="adm-panel" key="svc">
-          <div className="adm-card">
-            <h2>Services — {services.length}, locked order</h2>
-            <div style={{ marginTop: 8 }}>
-              {services.length === 0 && !loading ? <p className="adm-sub">No services yet — add one below.</p> : null}
-              {services.map((s, i) => (
-                <div className="adm-row" key={s.slug || i}>
-                  <span className="adm-num">{i + 1}</span>
-                  <div className="adm-info">
-                    <b>{s.title}</b>
-                    <p>{s.short} • icon: {s.icon || "—"}{s.showOn === "services" ? " • Services page only" : ""}</p>
+          <div className="adm-wk-list">
+            {services.length === 0 && !loading ? <p className="adm-sub">No services yet — add one below.</p> : null}
+            {services.map((s, i) => {
+              const isOpen = openSvc.includes(i);
+              const num = String(i + 1).padStart(2, "0");
+              return (
+                <div className={"wk-acc" + (isOpen ? " open" : "") + ((i + 1) % 2 === 0 ? " wk-even" : "")} key={s.slug || i}>
+                  <div className="wk-sum">
+                    <span className="wk-wm" aria-hidden="true">{num}</span>
+                    <button className="wk-sum-main" type="button" aria-expanded={isOpen} onClick={(e) => toggleAcc(setOpenSvc, i, e)}>
+                      <span className="wk-title">{s.title}</span>
+                      <span className="wk-clone c1" aria-hidden="true">{s.title}</span>
+                      <span className="wk-clone c2" aria-hidden="true">{s.title}</span>
+                      <span className="wk-clone c3" aria-hidden="true">{s.title}</span>
+                      <span className="wk-cat">icon: {s.icon || "—"}</span>
+                      <span className="wk-chev" aria-hidden="true">▾</span>
+                    </button>
+                    <span className="wk-row-actions">
+                      <button type="button" className="adm-btn adm-btn-gold" onClick={() => { setEditingService(s); showNotice(null); }}>Edit</button>
+                      <button
+                        type="button"
+                        className={`adm-toggle${s.visible !== false ? " on" : ""}`}
+                        aria-label={`${s.visible !== false ? "Hide" : "Show"} ${s.title}`}
+                        title="Show / hide"
+                        onClick={() => toggleVisible("services", s)}
+                      />
+                    </span>
                   </div>
-                  <button
-                    type="button"
-                    className={`adm-toggle${s.visible !== false ? " on" : ""}`}
-                    aria-label={`${s.visible !== false ? "Hide" : "Show"} ${s.title}`}
-                    title="Show / hide"
-                    onClick={() => toggleVisible("services", s)}
-                  />
-                  <button type="button" className="adm-btn adm-btn-ghost" onClick={() => { setEditingService(s); showNotice(null); }}>Edit</button>
+                  <div className="wk-body">
+                    <div className="wk-body-inner">
+                      <p className="wk-sub">{s.short}</p>
+                      {s.desc ? <p className="wk-desc">{s.desc}</p> : null}
+                      {(s.points || []).length ? (
+                        <div className="wk-chips">{s.points.map((pt) => <span key={pt} className="wk-chip">{pt}</span>)}</div>
+                      ) : null}
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
           <div className="adm-card" ref={formRef}>
             <h2>{editingService ? "Edit service" : "+ Add a service"}</h2>
@@ -561,38 +591,62 @@ export default function AdminApp() {
 
       {tab === "proj" ? (
         <div className="adm-panel" key="proj">
-          <div className="adm-card">
-            <h2>Projects — pin Top 4 for Home</h2>
-            <div style={{ marginTop: 8 }}>
-              {projects.length === 0 && !loading ? <p className="adm-sub">No projects yet — add one below.</p> : null}
-              {projects.map((p) => (
-                <div className="adm-row" key={p.slug}>
-                  <span className="adm-mono">{monogramOf(p)}</span>
-                  <div className="adm-info">
-                    <b>{p.title}</b>
-                    <p>{p.subtitle} • {p.category || "—"}</p>
-                    {(p.chips || []).length ? (
-                      <div className="adm-chips">{p.chips.map((c) => <span key={c} className="adm-chip">{c}</span>)}</div>
-                    ) : null}
+          <div className="adm-wk-list">
+            {projects.length === 0 && !loading ? <p className="adm-sub">No projects yet — add one below.</p> : null}
+            {projects.map((p, i) => {
+              const isOpen = openProj.includes(i);
+              const num = String(i + 1).padStart(2, "0");
+              return (
+                <div className={"wk-acc" + (isOpen ? " open" : "") + ((i + 1) % 2 === 0 ? " wk-even" : "")} key={p.slug}>
+                  <div className="wk-sum">
+                    <span className="wk-wm" aria-hidden="true">{num}</span>
+                    <button className="wk-sum-main" type="button" aria-expanded={isOpen} onClick={(e) => toggleAcc(setOpenProj, i, e)}>
+                      <span className="wk-title">{p.title}</span>
+                      <span className="wk-clone c1" aria-hidden="true">{p.title}</span>
+                      <span className="wk-clone c2" aria-hidden="true">{p.title}</span>
+                      <span className="wk-clone c3" aria-hidden="true">{p.title}</span>
+                      <span className="wk-cat">{p.category || "—"}</span>
+                      <span className="wk-chev" aria-hidden="true">▾</span>
+                    </button>
+                    <span className="wk-row-actions">
+                      <button
+                        type="button"
+                        className={`adm-pin${p.pinned ? " on" : ""}`}
+                        onClick={() => togglePin(p)}
+                      >
+                        {p.pinned ? "📌 Pinned — Home Top 4" : "Pin to Home"}
+                      </button>
+                      <button type="button" className="adm-btn adm-btn-gold" onClick={() => { setEditingProject(p); showNotice(null); }}>Edit</button>
+                      <button
+                        type="button"
+                        className={`adm-toggle${p.visible !== false ? " on" : ""}`}
+                        aria-label={`${p.visible !== false ? "Hide" : "Show"} ${p.title}`}
+                        title="Show / hide"
+                        onClick={() => toggleVisible("projects", p)}
+                      />
+                    </span>
                   </div>
-                  <button
-                    type="button"
-                    className={`adm-pin${p.pinned ? " on" : ""}`}
-                    onClick={() => togglePin(p)}
-                  >
-                    {p.pinned ? "📌 Pinned — Home Top 4" : "Pin to Home"}
-                  </button>
-                  <button
-                    type="button"
-                    className={`adm-toggle${p.visible !== false ? " on" : ""}`}
-                    aria-label={`${p.visible !== false ? "Hide" : "Show"} ${p.title}`}
-                    title="Show / hide"
-                    onClick={() => toggleVisible("projects", p)}
-                  />
-                  <button type="button" className="adm-btn adm-btn-ghost" onClick={() => { setEditingProject(p); showNotice(null); }}>Edit</button>
+                  <div className="wk-body">
+                    <div className="wk-body-inner">
+                      <p className="wk-sub">{p.subtitle}</p>
+                      <p className="wk-desc">{p.desc}</p>
+                      {p.built ? (
+                        <>
+                          <h3 className="wk-built-h">What was built</h3>
+                          <p className="wk-built">{p.built}</p>
+                        </>
+                      ) : null}
+                      {(p.chips || []).length ? (
+                        <div className="wk-chips">{p.chips.map((c) => <span key={c} className="wk-chip">{c}</span>)}</div>
+                      ) : null}
+                      {p.live ? (
+                        <a className="wk-live" href={p.live} target="_blank" rel="noopener noreferrer">Visit live site →</a>
+                      ) : null}
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
           <div className="adm-card" ref={formRef}>
             <h2>{editingProject ? "Edit project" : "+ Add a project"}</h2>
