@@ -2,11 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { PROJECTS } from "../lib/content";
+import { useLiveContent } from "./LiveContent";
 
 export default function WorkAccordion({ projects }) {
-  // DB-driven when the Work page passes projects; falls back to the static
-  // copy in lib/content.js when no prop is given (or it is empty).
-  const list = projects && projects.length ? projects : PROJECTS;
+  // Live list: refreshes from /api/content when the visitor returns to
+  // the tab after an admin edit (see useLiveContent). Falls back to the
+  // static copy in lib/content.js when no prop is given (or it is empty).
+  const live = useLiveContent({ projects });
+  const liveProjects = live.projects;
+  const list = liveProjects && liveProjects.length ? liveProjects : PROJECTS;
   const [open, setOpen] = useState([0]);
   const [swooshRow, setSwooshRow] = useState(null);
   const [swooshTick, setSwooshTick] = useState(0);
