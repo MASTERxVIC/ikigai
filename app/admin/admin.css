@@ -11,10 +11,9 @@
   font-size: 64px; color: rgba(230, 205, 150, 0.18); font-weight: 700;
   font-family: var(--font-noto-jp), "Noto Serif JP", serif;
 }
-.adm-eyebrow { color: var(--gold-light); font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
-.adm-hero h1 { font-size: 32px; margin: 8px 0 4px; color: #fff; }
-.adm-hero h1 em { font-style: italic; color: var(--gold-light); font-weight: 400; }
-.adm-hero p { color: #cfe0d4; font-size: 14.5px; max-width: 640px; margin: 0; }
+.adm-eyebrow { color: var(--gold-light); font-size: 11px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; }
+.adm-hero h1 { font-size: 32px; margin: 8px 0 0; color: #fff; }
+.adm-hero-sub { color: var(--gold-light); font-size: 12px; font-style: italic; margin-top: 4px; }
 .adm-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 22px 0 16px; }
 .adm-tab {
   border: 1.5px solid #ddd3ba; background: #fff; color: var(--emerald-800);
