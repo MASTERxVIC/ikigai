@@ -160,6 +160,11 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 14px; }
 .pillar-frame::before, .pillar-frame::after { content: ""; position: absolute; top: 0; bottom: 0; width: 54px; opacity: 0.5;
   background: repeating-linear-gradient(180deg, rgba(201,168,106,0.25) 0 14px, transparent 14px 30px); }
 .pillar-frame::before { left: 0; } .pillar-frame::after { right: 0; }
+/* ---------- DARUMA STORY BAND — torii photo background (0% blur) ---------- */
+.dark-band.daruma-story-bg { background-image: linear-gradient(rgba(7,31,21,0.55), rgba(7,31,21,0.55)), url("/assets/daruma-story-bg.jpg"); background-size: cover; background-position: center; }
+.dark-band.daruma-story-bg::before { display: none; }
+.daruma-story-bg .pillar-frame { background: transparent; border: none; }
+.daruma-story-bg .pillar-frame::before, .daruma-story-bg .pillar-frame::after { display: none; }
 
 /* ---------- WORK ---------- */
 .work-card { border-radius: var(--radius); overflow: hidden; background: #fff; box-shadow: var(--shadow); border: 1px solid rgba(16,64,46,0.08); }
