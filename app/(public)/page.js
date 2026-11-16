@@ -97,7 +97,7 @@ export default async function Home() {
       </section>
 
       {/* DARUMA STORY BAND */}
-      <section className="dark-band section" aria-label="The Daruma story">
+      <section className="dark-band section daruma-story-bg" aria-label="The Daruma story">
         <div className="container">
           <div className="story-grid">
           <div className="pillar-frame">
